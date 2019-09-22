@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="第五站 - 一个让 HTTP 服务人类的Requests库requests 模块介绍介绍 requests 模块可以模拟浏览器发送请求获取响应。  优势 requests 在 python2 和 python3 中通用，方法完全一样 requests 简单易用 requests 能够自动帮助我们解压(gzip压缩的等)网页内容  使用了非python自带的第三方库，那么首先要做的，当然是安装啦 r">
+<meta name="keywords" content="spider">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第五站 - 一个让 HTTP 服务人类的Requests库">
+<meta property="og:url" content="http://yoursite.com/2018/10/13/第五站 - 一个让 HTTP 服务人类的Requests库/index.html">
+<meta property="og:site_name" content="ChaoS-World">
+<meta property="og:description" content="第五站 - 一个让 HTTP 服务人类的Requests库requests 模块介绍介绍 requests 模块可以模拟浏览器发送请求获取响应。  优势 requests 在 python2 和 python3 中通用，方法完全一样 requests 简单易用 requests 能够自动帮助我们解压(gzip压缩的等)网页内容  使用了非python自带的第三方库，那么首先要做的，当然是安装啦 r">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2018/10/13/images/%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E7%9A%84%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/13/images/12306ssl%E9%94%99%E8%AF%AF.png">
+<meta property="og:updated_time" content="2019-09-22T14:23:13.937Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第五站 - 一个让 HTTP 服务人类的Requests库">
+<meta name="twitter:description" content="第五站 - 一个让 HTTP 服务人类的Requests库requests 模块介绍介绍 requests 模块可以模拟浏览器发送请求获取响应。  优势 requests 在 python2 和 python3 中通用，方法完全一样 requests 简单易用 requests 能够自动帮助我们解压(gzip压缩的等)网页内容  使用了非python自带的第三方库，那么首先要做的，当然是安装啦 r">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/13/images/%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E7%9A%84%E8%BF%87%E7%A8%8B.png">
+  <link rel="canonical" href="http://yoursite.com/2018/10/13/第五站 - 一个让 HTTP 服务人类的Requests库/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>第五站 - 一个让 HTTP 服务人类的Requests库 | ChaoS-World</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChaoS-World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/13/第五站 - 一个让 HTTP 服务人类的Requests库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChaoS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChaoS-World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">第五站 - 一个让 HTTP 服务人类的Requests库
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-10-13 07:21:56" itemprop="dateCreated datePublished" datetime="2018-10-13T07:21:56+08:00">2018-10-13</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-09-22 22:23:13" itemprop="dateModified" datetime="2019-09-22T22:23:13+08:00">2019-09-22</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="第五站-一个让-HTTP-服务人类的Requests库"><a href="#第五站-一个让-HTTP-服务人类的Requests库" class="headerlink" title="第五站 - 一个让 HTTP 服务人类的Requests库"></a>第五站 - 一个让 HTTP 服务人类的Requests库</h1><h2 id="requests-模块介绍"><a href="#requests-模块介绍" class="headerlink" title="requests 模块介绍"></a>requests 模块介绍</h2><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><blockquote>
+<p><code>requests</code> 模块可以模拟浏览器发送请求获取响应。</p>
+</blockquote>
+<h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ul>
+<li><code>requests</code> 在 <code>python2</code> 和 <code>python3</code> 中通用，方法完全一样</li>
+<li><code>requests</code> 简单易用</li>
+<li><code>requests</code> 能够自动帮助我们解压(gzip压缩的等)网页内容</li>
+</ul>
+<p><strong>使用了非python自带的第三方库，那么首先要做的，当然是安装啦</strong></p>
+<h2 id="requests-模块安装"><a href="#requests-模块安装" class="headerlink" title="requests 模块安装"></a>requests 模块安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装了模块后，我们一起来看看，这个让http为人类服务的requests库，到底是个何方神圣吧</strong></p>
+<h2 id="requests-模块使用"><a href="#requests-模块使用" class="headerlink" title="requests 模块使用"></a>requests 模块使用</h2><h4 id="一、基本使用"><a href="#一、基本使用" class="headerlink" title="一、基本使用"></a>一、基本使用</h4><h5 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 发送 GET 请求获取响应</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h5><ul>
+<li><p><code>response</code></p>
+<p>常用属性</p>
+<ul>
+<li><code>response.text</code> 返回响应内容，响应内容为 <code>str</code> 类型</li>
+<li><code>respones.content</code> 返回响应内容,响应内容为 <code>bytes</code> 类型</li>
+<li><code>response.status_code</code> 返回响应状态码</li>
+<li><code>response.request.headers</code> 返回请求头</li>
+<li><code>response.headers</code> 返回响应头</li>
+<li><code>response.cookies</code> 返回响应的 <code>RequestsCookieJar</code> 对象</li>
+</ul>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># response.content 转换 str类型</span></span><br><span class="line"><span class="comment"># 获取字节数据</span></span><br><span class="line">content = response.content</span><br><span class="line"><span class="comment"># 转换成字符串类型</span></span><br><span class="line">html = content.decode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># response.cookies操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回 RequestsCookieJar 对象</span></span><br><span class="line">cookies = response.cookies</span><br><span class="line"><span class="comment"># RequestsCookieJar 转 dict</span></span><br><span class="line">requests.utils.dict_from_cookiejar(cookies)</span><br><span class="line"><span class="comment"># dict 转 RequestsCookieJar</span></span><br><span class="line">requests.utils.cookiejar_from_dict()</span><br><span class="line"><span class="comment"># 对cookie进行操作,把一个字典添加到cookiejar中</span></span><br><span class="line">requests.utils.add_dict_to_cookiejar()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="二、自定义请求头"><a href="#二、自定义请求头" class="headerlink" title="二、自定义请求头"></a>二、自定义请求头</h4><h5 id="使用方式-1"><a href="#使用方式-1" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 发送自定义请求头</span></span><br><span class="line">response = requests.get(url,headers=headers)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-1"><a href="#代码讲解-1" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
+<p>发送请求时添加 <strong>headers</strong> 参数作为自定义请求头</p>
+</blockquote>
+<h4 id="三、发送-GET-请求"><a href="#三、发送-GET-请求" class="headerlink" title="三、发送 GET 请求"></a>三、发送 <strong>GET</strong> 请求</h4><h5 id="使用方式-2"><a href="#使用方式-2" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com/s'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义 GET 请求参数</span></span><br><span class="line">params = &#123;</span><br><span class="line">  <span class="string">"kw"</span>:<span class="string">"弟中弟学python爬虫"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用 GET 请求参数发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers,params=params)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-2"><a href="#代码讲解-2" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
+<p>发送请求时 <strong>params</strong> 参数作为 <code>GET</code> 请求参数</p>
+</blockquote>
+<h4 id="四、发送-POST-请求"><a href="#四、发送-POST-请求" class="headerlink" title="四、发送 POST 请求"></a>四、发送 <strong>POST</strong> 请求</h4><h5 id="使用方式-3"><a href="#使用方式-3" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义post请求参数</span></span><br><span class="line">data = &#123;</span><br><span class="line">  <span class="string">"kw"</span>:<span class="string">"弟中弟学python爬虫"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.post(url,headers=headers,data=data)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-3"><a href="#代码讲解-3" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
+<p>发送请求时 <strong>data</strong> 参数作为 <code>POST</code> 请求参数</p>
+</blockquote>
+<h4 id="五、保存图片"><a href="#五、保存图片" class="headerlink" title="五、保存图片"></a>五、保存图片</h4><h5 id="使用方式-4"><a href="#使用方式-4" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 下载图片地址</span></span><br><span class="line">url = <span class="string">"http://docs.python-requests.org/zh_CN/latest/_static/requests-sidebar.png"</span></span><br><span class="line"><span class="comment"># 发送请求获取响应</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"><span class="comment"># 保存图片</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'image.png'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">  f.write(response.content)</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-4"><a href="#代码讲解-4" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
+<ol>
+<li>保存图片时后缀名和请求的后缀名一致</li>
+<li>保存必须使用 <code>response.content</code> 进行保存文件</li>
+</ol>
+</blockquote>
+<h4 id="六、使用代理服务器"><a href="#六、使用代理服务器" class="headerlink" title="六、使用代理服务器"></a>六、使用代理服务器</h4><h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><ul>
+<li>让服务器以为不是同一个客户端在请求</li>
+<li>防止我们的真实地址被泄露，防止被追究</li>
+</ul>
+<h5 id="使用代理的过程"><a href="#使用代理的过程" class="headerlink" title="使用代理的过程"></a>使用代理的过程</h5><p><img src="../images/%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E7%9A%84%E8%BF%87%E7%A8%8B.png" alt="理解使用代理的过程"></p>
+<h5 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h5><ul>
+<li>透明代理(Transparent Proxy)：透明代理虽然可以直接“隐藏”你的IP地址，但是还是可以查到你是谁。</li>
+<li>匿名代理(Anonymous Proxy)：匿名代理比透明代理进步了一点：别人只能知道你用了代理，无法知道你是谁。</li>
+<li>混淆代理(Distorting Proxies)：与匿名代理相同，如果使用了混淆代理，别人还是能知道你在用代理，但是会得到一个假的IP地址，伪装的更逼真</li>
+<li>高匿代理(Elite proxy或High Anonymity Proxy)：可以看出来，高匿代理让别人根本无法发现你是在用代理，所以是最好的选择。</li>
+</ul>
+<blockquote>
+<p>在使用的使用，毫无疑问使用高匿代理效果最好</p>
+<p>从使用的协议：代理ip可以分为http代理，https代理，socket代理等，使用的时候需要根据抓取网站的协议来选择</p>
+</blockquote>
+<h5 id="使用方式-5"><a href="#使用方式-5" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义 代理服务器</span></span><br><span class="line">proxies = &#123;</span><br><span class="line">  <span class="string">"http"</span>:<span class="string">"http://IP地址:端口号"</span>,</span><br><span class="line">  <span class="string">"https"</span>:<span class="string">"https://IP地址:端口号"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers,proxies=proxies)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-5"><a href="#代码讲解-5" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
+<p>发送请求时 <strong>proxies</strong> 参数设置代理</p>
+</blockquote>
+<h4 id="七、发送请求携带-Cookies"><a href="#七、发送请求携带-Cookies" class="headerlink" title="七、发送请求携带 Cookies"></a>七、发送请求携带 Cookies</h4><h5 id="使用方式-6"><a href="#使用方式-6" class="headerlink" title="使用方式"></a>使用方式</h5><ol>
+<li>直接在自定义请求头中携带 <code>Cookie</code></li>
+<li>通过请求参数携带 Cookie 对象</li>
+</ol>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">  <span class="comment"># 方式一：直接在请求头中携带Cookie内容</span></span><br><span class="line">  <span class="string">"Cookie"</span>: <span class="string">"Cookie值"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 方式二：定义 cookies 值</span></span><br><span class="line">cookies = &#123;</span><br><span class="line">  <span class="string">"xx"</span>:<span class="string">"yy"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers,cookies=cookies)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-6"><a href="#代码讲解-6" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
+<p>发送请求时 <strong>cookies</strong> 参数携带 <code>Cookies</code></p>
+</blockquote>
+<h4 id="八、错误证书处理"><a href="#八、错误证书处理" class="headerlink" title="八、错误证书处理"></a>八、错误证书处理</h4><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p><img src="../images/12306ssl%E9%94%99%E8%AF%AF.png" alt="img"></p>
+<h5 id="使用方式-7"><a href="#使用方式-7" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://www.12306.cn/mormhweb/"</span></span><br><span class="line"><span class="comment"># 设置忽略证书</span></span><br><span class="line">response = requests.get(url,verify=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-7"><a href="#代码讲解-7" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
+<p>发送请求时 <strong>verify</strong> 参数设置为 <code>False</code> 表示不验证CA证书</p>
+</blockquote>
+<h4 id="九、超时处理"><a href="#九、超时处理" class="headerlink" title="九、超时处理"></a>九、超时处理</h4><h5 id="使用方式-8"><a href="#使用方式-8" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://www.baidu.com"</span></span><br><span class="line"><span class="comment"># 设置超时秒数</span></span><br><span class="line">response = requests.get(url,timeout=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-8"><a href="#代码讲解-8" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
+<p>发送请求时 <strong>timeout</strong> 参数设置为超时秒数</p>
+</blockquote>
+<h4 id="十、重试处理"><a href="#十、重试处理" class="headerlink" title="十、重试处理"></a>十、重试处理</h4><h5 id="使用方式-9"><a href="#使用方式-9" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">可以使用第三方模块 retrying 模块</span></span><br><span class="line"><span class="string">1. pip install retrying</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 1. 导入模块</span></span><br><span class="line"><span class="keyword">from</span> retrying <span class="keyword">import</span> retry</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 使用装饰器进行重试设置</span></span><br><span class="line"><span class="comment"># stop_max_attempt_number 表示重试次数</span></span><br><span class="line"><span class="meta">@retry(stop_max_attempt_number=3)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_url</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">"访问url:"</span>,url)</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">    &#125;</span><br><span class="line">    proxies = &#123;</span><br><span class="line">        <span class="string">"http"</span>:<span class="string">"http://124.235.135.210:80"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 设置超时参数</span></span><br><span class="line">    response = requests.get(url,headers=headers,proxies=proxies,timeout=<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">return</span> response.text</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    url = <span class="string">"http://www.baidu.com"</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        html = parse_url(url)</span><br><span class="line">        print(html)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="comment"># 把 url 记录到日志文件中，未来进行手动分析，然后对url进行重新请求</span></span><br><span class="line">        print(e)</span><br></pre></td></tr></table></figure>
+
+<h5 id="代码讲解-9"><a href="#代码讲解-9" class="headerlink" title="代码讲解"></a>代码讲解</h5><ul>
+<li><p>安装 <code>retrying</code> 模块</p>
+<blockquote>
+<p><code>retrying</code> 模块可以通过装饰器模式对某个函数进行监控，如果该函数引发异常就会触发重试操作</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install retrying</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对需要重试的函数进行装饰器设置</p>
+<blockquote>
+<p>通过 <code>@retry(stop_max_attempt_number=重试次数)</code> 参数设置重试次数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 导入模块</span></span><br><span class="line"><span class="keyword">from</span> retrying <span class="keyword">import</span> retry</span><br><span class="line"><span class="comment"># 2. 装饰器设置重试函数</span></span><br><span class="line"><span class="meta">@retry(stop_max_attempt_number=3)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exec_func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本站因为对requests库进行讲解，所以讲其属性都摆在了一起说明，这可能是前期最冗长的一站了，但是代码都不难，能看到本站文章的有缘人，理解着来看，代码中带有详细的注释</p>
+<ul>
+<li><p><code>requests</code>发送<code>GET</code>请求</p>
+<ul>
+<li><code>params</code> - 参数</li>
+</ul>
+</li>
+<li><p><code>requests</code>发送<code>POST</code>请求</p>
+<ul>
+<li><code>data</code> - 参数</li>
+</ul>
+</li>
+<li><p><code>requests</code>对象的基本属性</p>
+<ul>
+<li><code>content</code> - 获取内容（类型是字节串哦）</li>
+<li><code>text</code> - 获取内容（这个类型就是字符串了哦）</li>
+<li><code>url</code> - 响应地址</li>
+<li><code>headers</code> - 响应头</li>
+</ul>
+</li>
+<li><p><code>requests</code>使用代理服务器发送请求</p>
+<ul>
+<li>需要使用<code>proxies</code>参数</li>
+</ul>
+</li>
+<li><p><code>requests</code>携带<code>Cookies</code>发送请求</p>
+<ul>
+<li><code>cookie</code>可使用单独传参，也可以直接在<code>headers</code>中设置</li>
+<li><code>cookie</code>的作用还是比较重要的，常用于我们的模拟登陆</li>
+</ul>
+</li>
+<li><p><code>requests</code>超时处理</p>
+<ul>
+<li>使用<code>timeout</code>参数</li>
+</ul>
+</li>
+<li><p><code>requests</code>重试处理</p>
+<ul>
+<li>需要先安装<code>retry</code>模块</li>
+<li>使用<code>retrying</code>模块的<code>@retry</code></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/spider/" rel="tag"># spider</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/10/09/第四站 -  使用系统自带的网络库完成简单的数据抓取/" rel="next" title="第四站 -  使用系统自带的网络库完成简单的数据抓取">
+                  <i class="fa fa-chevron-left"></i> 第四站 -  使用系统自带的网络库完成简单的数据抓取
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/10/21/第六站 - 使用requests库来一次真真正正的实战吧！/" rel="prev" title="第六站 - 使用requests库来一次真真正正的实战吧！">
+                  第六站 - 使用requests库来一次真真正正的实战吧！ <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第五站-一个让-HTTP-服务人类的Requests库"><span class="nav-number">1.</span> <span class="nav-text">第五站 - 一个让 HTTP 服务人类的Requests库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#requests-模块介绍"><span class="nav-number">1.1.</span> <span class="nav-text">requests 模块介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#介绍"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优势"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">优势</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#requests-模块安装"><span class="nav-number">1.2.</span> <span class="nav-text">requests 模块安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#requests-模块使用"><span class="nav-number">1.3.</span> <span class="nav-text">requests 模块使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、基本使用"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">一、基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式"><span class="nav-number">1.3.0.1.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解"><span class="nav-number">1.3.0.1.2.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、自定义请求头"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">二、自定义请求头</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-1"><span class="nav-number">1.3.0.2.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-1"><span class="nav-number">1.3.0.2.2.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、发送-GET-请求"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">三、发送 GET 请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-2"><span class="nav-number">1.3.0.3.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-2"><span class="nav-number">1.3.0.3.2.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、发送-POST-请求"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">四、发送 POST 请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-3"><span class="nav-number">1.3.0.4.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-3"><span class="nav-number">1.3.0.4.2.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、保存图片"><span class="nav-number">1.3.0.5.</span> <span class="nav-text">五、保存图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-4"><span class="nav-number">1.3.0.5.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-4"><span class="nav-number">1.3.0.5.2.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、使用代理服务器"><span class="nav-number">1.3.0.6.</span> <span class="nav-text">六、使用代理服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#作用"><span class="nav-number">1.3.0.6.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用代理的过程"><span class="nav-number">1.3.0.6.2.</span> <span class="nav-text">使用代理的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代理分类"><span class="nav-number">1.3.0.6.3.</span> <span class="nav-text">代理分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-5"><span class="nav-number">1.3.0.6.4.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-5"><span class="nav-number">1.3.0.6.5.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、发送请求携带-Cookies"><span class="nav-number">1.3.0.7.</span> <span class="nav-text">七、发送请求携带 Cookies</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-6"><span class="nav-number">1.3.0.7.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.3.0.7.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-6"><span class="nav-number">1.3.0.7.3.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、错误证书处理"><span class="nav-number">1.3.0.8.</span> <span class="nav-text">八、错误证书处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题描述"><span class="nav-number">1.3.0.8.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-7"><span class="nav-number">1.3.0.8.2.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-7"><span class="nav-number">1.3.0.8.3.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九、超时处理"><span class="nav-number">1.3.0.9.</span> <span class="nav-text">九、超时处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-8"><span class="nav-number">1.3.0.9.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-8"><span class="nav-number">1.3.0.9.2.</span> <span class="nav-text">代码讲解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十、重试处理"><span class="nav-number">1.3.0.10.</span> <span class="nav-text">十、重试处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用方式-9"><span class="nav-number">1.3.0.10.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码讲解-9"><span class="nav-number">1.3.0.10.2.</span> <span class="nav-text">代码讲解</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ChaoS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChaoS</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

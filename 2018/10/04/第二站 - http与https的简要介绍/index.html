@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="第二站 - http与https的简要介绍HTTP 与 HTTPS 的概念 HTTP 超文本传输协议 默认端口号:80   HTTPS HTTP + SSL(安全套接字层)，即带有安全套接字层的超本文传输协议 默认端口号：443    HTTP 协议一、 HTTP 请求流程  浏览器通过域名解析服务器（DNS）获取IP地址 浏览器先向IP发起请求，并获取相应 在返回的响应内容（html）中，会带有">
+<meta name="keywords" content="spider">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二站 - http与https的简要介绍">
+<meta property="og:url" content="http://yoursite.com/2018/10/04/第二站 - http与https的简要介绍/index.html">
+<meta property="og:site_name" content="ChaoS-World">
+<meta property="og:description" content="第二站 - http与https的简要介绍HTTP 与 HTTPS 的概念 HTTP 超文本传输协议 默认端口号:80   HTTPS HTTP + SSL(安全套接字层)，即带有安全套接字层的超本文传输协议 默认端口号：443    HTTP 协议一、 HTTP 请求流程  浏览器通过域名解析服务器（DNS）获取IP地址 浏览器先向IP发起请求，并获取相应 在返回的响应内容（html）中，会带有">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2018/10/04/images/http%E5%8F%91%E9%80%81%E7%9A%84%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/04/images/http%E7%9A%84url%E8%A7%84%E5%88%99.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/10/04/images/%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/04/images/%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE%E6%A1%88%E4%BE%8B.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/10/04/images/%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F.jpg">
+<meta property="og:updated_time" content="2019-09-22T14:21:32.273Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二站 - http与https的简要介绍">
+<meta name="twitter:description" content="第二站 - http与https的简要介绍HTTP 与 HTTPS 的概念 HTTP 超文本传输协议 默认端口号:80   HTTPS HTTP + SSL(安全套接字层)，即带有安全套接字层的超本文传输协议 默认端口号：443    HTTP 协议一、 HTTP 请求流程  浏览器通过域名解析服务器（DNS）获取IP地址 浏览器先向IP发起请求，并获取相应 在返回的响应内容（html）中，会带有">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/04/images/http%E5%8F%91%E9%80%81%E7%9A%84%E8%BF%87%E7%A8%8B.png">
+  <link rel="canonical" href="http://yoursite.com/2018/10/04/第二站 - http与https的简要介绍/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>第二站 - http与https的简要介绍 | ChaoS-World</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChaoS-World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/04/第二站 - http与https的简要介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChaoS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChaoS-World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">第二站 - http与https的简要介绍
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-10-04 13:17:26" itemprop="dateCreated datePublished" datetime="2018-10-04T13:17:26+08:00">2018-10-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-09-22 22:21:32" itemprop="dateModified" datetime="2019-09-22T22:21:32+08:00">2019-09-22</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="第二站-http与https的简要介绍"><a href="#第二站-http与https的简要介绍" class="headerlink" title="第二站 - http与https的简要介绍"></a>第二站 - http与https的简要介绍</h1><h2 id="HTTP-与-HTTPS-的概念"><a href="#HTTP-与-HTTPS-的概念" class="headerlink" title="HTTP 与 HTTPS 的概念"></a>HTTP 与 HTTPS 的概念</h2><ul>
+<li>HTTP<ul>
+<li>超文本传输协议</li>
+<li>默认端口号:80</li>
+</ul>
+</li>
+<li>HTTPS<ul>
+<li>HTTP + SSL(安全套接字层)，即带有安全套接字层的超本文传输协议</li>
+<li>默认端口号：443</li>
+</ul>
+</li>
+</ul>
+<h2 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h2><h3 id="一、-HTTP-请求流程"><a href="#一、-HTTP-请求流程" class="headerlink" title="一、 HTTP 请求流程"></a>一、 HTTP 请求流程</h3><p><img src="../images/http%E5%8F%91%E9%80%81%E7%9A%84%E8%BF%87%E7%A8%8B.png" alt="img"></p>
+<ol>
+<li>浏览器通过域名解析服务器（DNS）获取IP地址</li>
+<li>浏览器先向IP发起请求，并获取相应</li>
+<li>在返回的响应内容（html）中，会带有css、js、图片等url地址，以及ajax代码，浏览器按照响应内容中的顺序依次发送其他的请求，并获取相应的响应</li>
+<li>浏览器每获取一个响应就对展示出的结果进行添加（加载），js，css等内容会修改页面的内容，js也可以重新发送请求，获取响应</li>
+<li>从获取第一个响应并在浏览器中展示，直到最终获取全部响应，并在展示的结果中添加内容或修改————这个过程叫做浏览器的<strong>渲染</strong></li>
+</ol>
+<h3 id="二、-URL-地址格式"><a href="#二、-URL-地址格式" class="headerlink" title="二、 URL 地址格式"></a>二、 URL 地址格式</h3><p><img src="../images/http%E7%9A%84url%E8%A7%84%E5%88%99.jpg" alt="http的url规则"></p>
+<h5 id="格式说明"><a href="#格式说明" class="headerlink" title="格式说明:"></a>格式说明:</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme:<span class="comment">//host[:port]/path/…/[?query-string][#anchor]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>scheme</strong>：协议（例如：http, https, ftp）</li>
+<li><strong>host</strong>：服务器的IP地址或者域名</li>
+<li><strong>port</strong>：服务器的端口（如果是走协议默认端口，缺省端口80）</li>
+<li><strong>path</strong>：访问资源的路径</li>
+<li><strong>query-string</strong>：参数，发送给http服务器的数据</li>
+<li><strong>anchor</strong>：锚（跳转到网页的指定锚点位置）<ul>
+<li><strong>注意：锚点的跳转并不会刷新页面！！</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="三、-HTTP-请求"><a href="#三、-HTTP-请求" class="headerlink" title="三、 HTTP 请求"></a>三、 HTTP 请求</h3><h5 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h5><p><img src="../images/%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE%E6%A0%BC%E5%BC%8F.png" alt="请求协议格式"></p>
+<h5 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h5><p><img src="../images/%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE%E6%A1%88%E4%BE%8B.jpg" alt="请求协议案例"></p>
+<h5 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h5><blockquote>
+<p>根据HTTP标准，HTTP请求可以使用多种请求方法。</p>
+<p>HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。</p>
+<p>HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">请求方式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GET</td>
+<td align="left">请求指定的页面信息，并返回实体主体。</td>
+</tr>
+<tr>
+<td align="center">HEAD</td>
+<td align="left">类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="left">向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。</td>
+</tr>
+<tr>
+<td align="center">PUT</td>
+<td align="left">从客户端向服务器传送的数据取代指定的文档的内容。</td>
+</tr>
+<tr>
+<td align="center">DELETE</td>
+<td align="left">请求服务器删除指定的页面。</td>
+</tr>
+<tr>
+<td align="center">CONNECT</td>
+<td align="left">HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</td>
+</tr>
+<tr>
+<td align="center">OPTIONS</td>
+<td align="left">允许客户端查看服务器的性能。</td>
+</tr>
+<tr>
+<td align="center">TRACE</td>
+<td align="left">回显服务器收到的请求，主要用于测试或诊断。</td>
+</tr>
+</tbody></table>
+<h3 id="常见请求头"><a href="#常见请求头" class="headerlink" title="常见请求头"></a>常见请求头</h3><table>
+<thead>
+<tr>
+<th align="left">请求头</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Cookie</strong></td>
+<td align="left">Cookie</td>
+</tr>
+<tr>
+<td align="left"><strong>User-Agent</strong></td>
+<td align="left">浏览器名称</td>
+</tr>
+<tr>
+<td align="left"><strong>Referer</strong></td>
+<td align="left">页面跳转处</td>
+</tr>
+<tr>
+<td align="left">Host</td>
+<td align="left">主机和端口号</td>
+</tr>
+<tr>
+<td align="left">Connection</td>
+<td align="left">链接类型</td>
+</tr>
+<tr>
+<td align="left">Upgrade-Insecure-Requests</td>
+<td align="left">升级为 <code>HTTPS</code> 请求</td>
+</tr>
+<tr>
+<td align="left">Accept</td>
+<td align="left">传输文件类型</td>
+</tr>
+<tr>
+<td align="left">Accept-Encoding</td>
+<td align="left">文件编解码格式</td>
+</tr>
+<tr>
+<td align="left">x-requested-with : XMLHttpRequest</td>
+<td align="left">ajax 请求</td>
+</tr>
+</tbody></table>
+<p><a href="../附录/HTTP请求列表.html">点击更多</a></p>
+<h3 id="四、-HTTP-响应"><a href="#四、-HTTP-响应" class="headerlink" title="四、 HTTP 响应"></a>四、 HTTP 响应</h3><h4 id="响应格式"><a href="#响应格式" class="headerlink" title="响应格式"></a>响应格式</h4><blockquote>
+<p>HTTP响应也由<strong>四</strong>个部分组成，分别是：<strong>状态行</strong>、<strong>消息报头</strong>、<strong>空行（回车符 + 换行符）</strong>和<strong>响应正文</strong>。</p>
+</blockquote>
+<p><img src="../images/%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F.jpg" alt="响应格式"></p>
+<h4 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h4><table>
+<thead>
+<tr>
+<th align="left">请求头</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Location</strong></td>
+<td align="left">这个头配合302状态码使用，告诉用户端找谁。</td>
+</tr>
+<tr>
+<td align="left"><strong>Set-Cookie</strong></td>
+<td align="left">设置和页面关联的Cookie</td>
+</tr>
+<tr>
+<td align="left">Content-Type</td>
+<td align="left">服务器通过这个头，回送数据的类型</td>
+</tr>
+<tr>
+<td align="left">Server</td>
+<td align="left">服务器通过这个头，告诉浏览器服务器的类型</td>
+</tr>
+<tr>
+<td align="left">Content-Length</td>
+<td align="left">服务器通过这个头，告诉浏览器回送数据的长度。</td>
+</tr>
+<tr>
+<td align="left">Connection</td>
+<td align="left">服务器通过这个头，响应完是保持链接还是关闭链接。</td>
+</tr>
+</tbody></table>
+<h4 id="HTTP-状态码"><a href="#HTTP-状态码" class="headerlink" title="HTTP 状态码"></a>HTTP 状态码</h4><blockquote>
+<p>当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。</p>
+<p>HTTP状态码的英文为HTTP Status Code。</p>
+<p>HTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP 状态码共分为5种类型</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="left">分类描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1**</td>
+<td align="left">信息，服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td align="center">2**</td>
+<td align="left">成功，操作被成功接收并处理</td>
+</tr>
+<tr>
+<td align="center">3**</td>
+<td align="left">重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td align="center">4**</td>
+<td align="left">客户端错误，请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td align="center">5**</td>
+<td align="left">服务器错误，服务器在处理请求的过程中发生了错误</td>
+</tr>
+</tbody></table>
+<ul>
+<li>常见的HTTP状态码：<ul>
+<li>200 - 请求成功</li>
+<li>301 - 资源（网页等）被永久转移到其它URL</li>
+<li>404 - 请求的资源（网页等）不存在</li>
+<li>500 - 内部服务器错误</li>
+</ul>
+</li>
+</ul>
+<h2 id="HTTPS协议"><a href="#HTTPS协议" class="headerlink" title="HTTPS协议"></a>HTTPS协议</h2><h3 id="HTTPS-作用"><a href="#HTTPS-作用" class="headerlink" title="HTTPS 作用"></a>HTTPS 作用</h3><blockquote>
+<p>在 <strong>传输过程中</strong> 对数据进行加密，防止中间路由器、交换机等中间的路由设备对数据进行篡改。</p>
+</blockquote>
+<h3 id="HTTP-与-HTTPS-优缺点"><a href="#HTTP-与-HTTPS-优缺点" class="headerlink" title="HTTP 与 HTTPS 优缺点"></a>HTTP 与 HTTPS 优缺点</h3><blockquote>
+<p>HTTP 因为不需要对数据进行加密所以性能更高，但是安全性差。</p>
+<p>HTTPS 虽然安全性高，但是因为浏览器和服务器端需要对数据进行加解密，所以占用服务器资源。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>了解 HTTP 的概念<ul>
+<li>超文本传输协议</li>
+</ul>
+</li>
+<li>掌握 HTTP 请求过程<ul>
+<li><code>域名</code> =&gt; <code>DNS</code> =&gt; <code>IP</code> =&gt; <code>内容</code></li>
+</ul>
+</li>
+<li>掌握 HTTP 请求格式</li>
+<li>掌握 HTTP 响应格式</li>
+<li>掌握 HTTP 常见头<ul>
+<li>User-Agent</li>
+<li>Referer</li>
+<li>Cookies</li>
+</ul>
+</li>
+<li>掌握 HTTP 常见响应状态码<ul>
+<li>200</li>
+<li>404</li>
+<li>500</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/spider/" rel="tag"># spider</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2018/10/01/第一站 - 爬虫预备知识/" rel="next" title="第一站 - 爬虫预备知识">
+                  <i class="fa fa-chevron-left"></i> 第一站 - 爬虫预备知识
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/10/06/第三站 - 初识chrome（谷歌）浏览器/" rel="prev" title="第三站 - 初识chrome（谷歌）浏览器">
+                  第三站 - 初识chrome（谷歌）浏览器 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二站-http与https的简要介绍"><span class="nav-number">1.</span> <span class="nav-text">第二站 - http与https的简要介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-与-HTTPS-的概念"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP 与 HTTPS 的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-协议"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、-HTTP-请求流程"><span class="nav-number">1.2.1.</span> <span class="nav-text">一、 HTTP 请求流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、-URL-地址格式"><span class="nav-number">1.2.2.</span> <span class="nav-text">二、 URL 地址格式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#格式说明"><span class="nav-number">1.2.2.0.1.</span> <span class="nav-text">格式说明:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、-HTTP-请求"><span class="nav-number">1.2.3.</span> <span class="nav-text">三、 HTTP 请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#请求格式"><span class="nav-number">1.2.3.0.1.</span> <span class="nav-text">请求格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#案例"><span class="nav-number">1.2.3.0.2.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求方式"><span class="nav-number">1.2.3.0.3.</span> <span class="nav-text">请求方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见请求头"><span class="nav-number">1.2.4.</span> <span class="nav-text">常见请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、-HTTP-响应"><span class="nav-number">1.2.5.</span> <span class="nav-text">四、 HTTP 响应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#响应格式"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">响应格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应头"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">响应头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-状态码"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">HTTP 状态码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS协议"><span class="nav-number">1.3.</span> <span class="nav-text">HTTPS协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS-作用"><span class="nav-number">1.3.1.</span> <span class="nav-text">HTTPS 作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-与-HTTPS-优缺点"><span class="nav-number">1.3.2.</span> <span class="nav-text">HTTP 与 HTTPS 优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ChaoS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChaoS</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
