@@ -25,7 +25,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.3.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
@@ -157,6 +157,28 @@
       
       
         
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
         <li class="menu-item menu-item-archives">
       
     
@@ -165,8 +187,6 @@
 
   </li>
   </ul>
-
-    
 
 </nav>
 </div>
@@ -182,6 +202,8 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div id="content" class="content">
             
   <div id="posts" class="posts-expand">
@@ -195,7 +217,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChaoS">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/soso.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -230,7 +252,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-22 22:24:01" itemprop="dateModified" datetime="2019-09-22T22:24:01+08:00">2019-09-22</time>
+                <time title="修改时间：2019-09-25 06:02:38" itemprop="dateModified" datetime="2019-09-25T06:02:38+08:00">2019-09-25</time>
               </span>
             
           
@@ -247,78 +269,15 @@
 
       
           <h1 id="第六站-使用requests库来一次真真正正的实战吧！"><a href="#第六站-使用requests库来一次真真正正的实战吧！" class="headerlink" title="第六站 - 使用requests库来一次真真正正的实战吧！"></a>第六站 - 使用requests库来一次真真正正的实战吧！</h1><h2 id="豆瓣热门电影爬虫"><a href="#豆瓣热门电影爬虫" class="headerlink" title="豆瓣热门电影爬虫"></a>豆瓣热门电影爬虫</h2><p><strong>这个项目非常适合刚开始接触爬虫的同学们学习，也是对requests库的一次实战练习</strong></p>
-<h3 id="1-分析"><a href="#1-分析" class="headerlink" title="1. 分析"></a>1. 分析</h3><h4 id="分析结果"><a href="#分析结果" class="headerlink" title="分析结果"></a>分析结果</h4><h5 id="结果概要"><a href="#结果概要" class="headerlink" title="结果概要"></a>结果概要</h5><table>
-<thead>
-<tr>
-<th align="left">分析目标</th>
-<th align="left">分析结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">请求URL分析</td>
-<td align="left"><a href="https://movie.douban.com/j/search_subjects" target="_blank" rel="noopener">https://movie.douban.com/j/search_subjects</a></td>
-</tr>
-<tr>
-<td align="left">请求方式分析</td>
-<td align="left">GET</td>
-</tr>
-<tr>
-<td align="left">请求参数分析</td>
-<td align="left">请查看请求参数分析</td>
-</tr>
-<tr>
-<td align="left">请求头分析</td>
-<td align="left">请查看请求头分析</td>
-</tr>
-</tbody></table>
-<h5 id="请求参数分析"><a href="#请求参数分析" class="headerlink" title="请求参数分析"></a>请求参数分析</h5><table>
-<thead>
-<tr>
-<th align="left">参数KEY</th>
-<th align="left">分析结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">type</td>
-<td align="left">movie（固定值不变）</td>
-</tr>
-<tr>
-<td align="left">tag</td>
-<td align="left">热门（固定值不变）</td>
-</tr>
-<tr>
-<td align="left">sort</td>
-<td align="left">recommend（固定值不变）</td>
-</tr>
-<tr>
-<td align="left">page_limit</td>
-<td align="left">20（固定值不变，表示每页数量）</td>
-</tr>
-<tr>
-<td align="left">page_start</td>
-<td align="left">0（每次请求发生变化，每20页进行叠加，表示数据的偏移量）</td>
-</tr>
-</tbody></table>
-<h5 id="请求头分析"><a href="#请求头分析" class="headerlink" title="请求头分析"></a>请求头分析</h5><table>
-<thead>
-<tr>
-<th align="left">请求头</th>
-<th align="left">分析结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">User-Agent</td>
-<td align="left">Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36</td>
-</tr>
-</tbody></table>
-<h4 id="代码实现流程"><a href="#代码实现流程" class="headerlink" title="代码实现流程"></a>代码实现流程</h4><ol>
-<li>先实现一次请求抓取数据</li>
-<li>实现循环请求抓取数据</li>
-</ol>
-<h3 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2. 代码实现"></a>2. 代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第0步,开始分析我们需要爬取页面的流程</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">url:</span></span><br><span class="line"><span class="string">https://movie.douban.com/j/search_subjects?type=movie&amp;tag=%E7%83%AD%E9%97%A8&amp;sort=recommend&amp;page_limit=20&amp;page_start=20</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">GET</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">params:</span></span><br><span class="line"><span class="string">type: movie</span></span><br><span class="line"><span class="string">tag: 热门</span></span><br><span class="line"><span class="string">sort: recommend</span></span><br><span class="line"><span class="string">page_limit: 20</span></span><br><span class="line"><span class="string">page_start: page</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">headers:</span></span><br><span class="line"><span class="string">User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36</span></span><br><span class="line"><span class="string">Referer: https://movie.douban.com/explore</span></span><br><span class="line"><span class="string">Cookie: ll="118282"; bid=m-soFyeIFbs; __yadk_uid=6wuAVW79I5VBpN2fq2UW2mXflJ4a8AaJ; __utma=30149280.548002093.1565947913.1565947913.1569015577.2; __utmc=30149280; __utmz=30149280.1569015577.2.2.utmcsr=baidu|utmccn=(organic)|utmcmd=organic; __utmt=1; __utmb=30149280.1.10.1569015577; ap_v=0,6.0; __utma=223695111.1243111299.1565947913.1565947913.1569015579.2; __utmb=223695111.0.10.1569015579; __utmc=223695111; __utmz=223695111.1569015579.2.2.utmcsr=douban.com|utmccn=(referral)|utmcmd=referral|utmcct=/; _pk_ref.100001.4cf6=%5B%22%22%2C%22%22%2C1569015579%2C%22https%3A%2F%2Fwww.douban.com%2F%22%5D; _pk_ses.100001.4cf6=*; _vwo_uuid_v2=D74F943D9E2D9F3BEA48B511C8D98DB6D|82f8656be86b41e3713fcd50f7675463; __gads=ID=162aff99b341162d:T=1569015639:S=ALNI_MZn1V1C-wak0wc9oYPzsY53U-F11A; _pk_id.100001.4cf6=febb1e9f37d72136.1565947914.2.1569015645.1565948593.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">弟中弟的开始学习爬虫时的习惯是，每次将流程及需要使用的参数、信息都以注释的形式写在代码的开头。这样的好处是可以理清整体的思路，让自己在编写代码的时候避免犯一些低级错误</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第1步,经过分析,将我们已知需要用到的库导入(若后续用到其他的,可以再进行添加)</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当我们不知道能获取多少数据的时候,我们就将这个上限放大点,后续再通过判断获取数据的长度进行判断</span></span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">100000</span>, <span class="number">20</span>):</span><br><span class="line">    <span class="comment"># 接下来就是我们对获取热门电影的数据接口发起请求</span></span><br><span class="line">    req = requests.get(</span><br><span class="line">        url=<span class="string">"https://movie.douban.com/j/search_subjects"</span>,</span><br><span class="line">        headers=&#123;</span><br><span class="line">            <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        params=&#123;</span><br><span class="line">            <span class="string">"type"</span>: <span class="string">"movie"</span>,</span><br><span class="line">            <span class="string">"tag"</span>: <span class="string">"热门"</span>,</span><br><span class="line">            <span class="string">"sort"</span>: <span class="string">"recommend"</span>,</span><br><span class="line">            <span class="string">"page_limit"</span>: <span class="string">"20"</span>,</span><br><span class="line">            <span class="string">"page_start"</span>: page,</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">    <span class="comment"># 在前期使用chrome浏览器分析的时候就得知,该接口返回的是json格式数据,所以这里我们直接使用json方法,将数据获取</span></span><br><span class="line">    result = req.json()</span><br><span class="line">    <span class="comment"># 判断获取到的数据是否还有值,若为0,则代表已经获取完毕,退出循环</span></span><br><span class="line">    <span class="keyword">if</span> len(result[<span class="string">'subjects'</span>]) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="comment"># 接下来则是将我们需要的数据提取出来,并写入到一个txt文件中</span></span><br><span class="line">    <span class="keyword">for</span> movie <span class="keyword">in</span> result[<span class="string">'subjects'</span>]:</span><br><span class="line">        print(movie[<span class="string">"title"</span>], movie[<span class="string">"rate"</span>])</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'movie.txt'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(<span class="string">"movie_title:&#123;&#125;, movie_rate:&#123;&#125;"</span>.format(movie[<span class="string">'title'</span>], movie[<span class="string">'rate'</span>]) + <span class="string">"\n"</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过本站的代码实战，童鞋们回发现，其实，使用<code>requests</code>进行热门电影的信息获取也不是一件很难的事情。首先恭喜你们成功的获取到了电影的信息，但是，童鞋们也要知道，这只是我们爬虫学习的一个开始。能通过自己编写的代码，获取到自己想要的数据，这想想就是一件非常酷的事情，不是吗?</p>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/21/第六站 - 使用requests库来一次真真正正的实战吧！/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -347,7 +306,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChaoS">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/soso.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -382,7 +341,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-22 22:23:13" itemprop="dateModified" datetime="2019-09-22T22:23:13+08:00">2019-09-22</time>
+                <time title="修改时间：2019-09-25 06:39:56" itemprop="dateModified" datetime="2019-09-25T06:39:56+08:00">2019-09-25</time>
               </span>
             
           
@@ -401,159 +360,15 @@
           <h1 id="第五站-一个让-HTTP-服务人类的Requests库"><a href="#第五站-一个让-HTTP-服务人类的Requests库" class="headerlink" title="第五站 - 一个让 HTTP 服务人类的Requests库"></a>第五站 - 一个让 HTTP 服务人类的Requests库</h1><h2 id="requests-模块介绍"><a href="#requests-模块介绍" class="headerlink" title="requests 模块介绍"></a>requests 模块介绍</h2><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><blockquote>
 <p><code>requests</code> 模块可以模拟浏览器发送请求获取响应。</p>
 </blockquote>
-<h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ul>
-<li><code>requests</code> 在 <code>python2</code> 和 <code>python3</code> 中通用，方法完全一样</li>
-<li><code>requests</code> 简单易用</li>
-<li><code>requests</code> 能够自动帮助我们解压(gzip压缩的等)网页内容</li>
-</ul>
-<p><strong>使用了非python自带的第三方库，那么首先要做的，当然是安装啦</strong></p>
-<h2 id="requests-模块安装"><a href="#requests-模块安装" class="headerlink" title="requests 模块安装"></a>requests 模块安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
-
-<p><strong>安装了模块后，我们一起来看看，这个让http为人类服务的requests库，到底是个何方神圣吧</strong></p>
-<h2 id="requests-模块使用"><a href="#requests-模块使用" class="headerlink" title="requests 模块使用"></a>requests 模块使用</h2><h4 id="一、基本使用"><a href="#一、基本使用" class="headerlink" title="一、基本使用"></a>一、基本使用</h4><h5 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 发送 GET 请求获取响应</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解"><a href="#代码讲解" class="headerlink" title="代码讲解"></a>代码讲解</h5><ul>
-<li><p><code>response</code></p>
-<p>常用属性</p>
-<ul>
-<li><code>response.text</code> 返回响应内容，响应内容为 <code>str</code> 类型</li>
-<li><code>respones.content</code> 返回响应内容,响应内容为 <code>bytes</code> 类型</li>
-<li><code>response.status_code</code> 返回响应状态码</li>
-<li><code>response.request.headers</code> 返回请求头</li>
-<li><code>response.headers</code> 返回响应头</li>
-<li><code>response.cookies</code> 返回响应的 <code>RequestsCookieJar</code> 对象</li>
-</ul>
-</li>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># response.content 转换 str类型</span></span><br><span class="line"><span class="comment"># 获取字节数据</span></span><br><span class="line">content = response.content</span><br><span class="line"><span class="comment"># 转换成字符串类型</span></span><br><span class="line">html = content.decode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># response.cookies操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回 RequestsCookieJar 对象</span></span><br><span class="line">cookies = response.cookies</span><br><span class="line"><span class="comment"># RequestsCookieJar 转 dict</span></span><br><span class="line">requests.utils.dict_from_cookiejar(cookies)</span><br><span class="line"><span class="comment"># dict 转 RequestsCookieJar</span></span><br><span class="line">requests.utils.cookiejar_from_dict()</span><br><span class="line"><span class="comment"># 对cookie进行操作,把一个字典添加到cookiejar中</span></span><br><span class="line">requests.utils.add_dict_to_cookiejar()</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="二、自定义请求头"><a href="#二、自定义请求头" class="headerlink" title="二、自定义请求头"></a>二、自定义请求头</h4><h5 id="使用方式-1"><a href="#使用方式-1" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 发送自定义请求头</span></span><br><span class="line">response = requests.get(url,headers=headers)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-1"><a href="#代码讲解-1" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
-<p>发送请求时添加 <strong>headers</strong> 参数作为自定义请求头</p>
-</blockquote>
-<h4 id="三、发送-GET-请求"><a href="#三、发送-GET-请求" class="headerlink" title="三、发送 GET 请求"></a>三、发送 <strong>GET</strong> 请求</h4><h5 id="使用方式-2"><a href="#使用方式-2" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com/s'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义 GET 请求参数</span></span><br><span class="line">params = &#123;</span><br><span class="line">  <span class="string">"kw"</span>:<span class="string">"弟中弟学python爬虫"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用 GET 请求参数发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers,params=params)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-2"><a href="#代码讲解-2" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
-<p>发送请求时 <strong>params</strong> 参数作为 <code>GET</code> 请求参数</p>
-</blockquote>
-<h4 id="四、发送-POST-请求"><a href="#四、发送-POST-请求" class="headerlink" title="四、发送 POST 请求"></a>四、发送 <strong>POST</strong> 请求</h4><h5 id="使用方式-3"><a href="#使用方式-3" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义post请求参数</span></span><br><span class="line">data = &#123;</span><br><span class="line">  <span class="string">"kw"</span>:<span class="string">"弟中弟学python爬虫"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.post(url,headers=headers,data=data)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-3"><a href="#代码讲解-3" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
-<p>发送请求时 <strong>data</strong> 参数作为 <code>POST</code> 请求参数</p>
-</blockquote>
-<h4 id="五、保存图片"><a href="#五、保存图片" class="headerlink" title="五、保存图片"></a>五、保存图片</h4><h5 id="使用方式-4"><a href="#使用方式-4" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 下载图片地址</span></span><br><span class="line">url = <span class="string">"http://docs.python-requests.org/zh_CN/latest/_static/requests-sidebar.png"</span></span><br><span class="line"><span class="comment"># 发送请求获取响应</span></span><br><span class="line">response = requests.get(url)</span><br><span class="line"><span class="comment"># 保存图片</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'image.png'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">  f.write(response.content)</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-4"><a href="#代码讲解-4" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
-<ol>
-<li>保存图片时后缀名和请求的后缀名一致</li>
-<li>保存必须使用 <code>response.content</code> 进行保存文件</li>
-</ol>
-</blockquote>
-<h4 id="六、使用代理服务器"><a href="#六、使用代理服务器" class="headerlink" title="六、使用代理服务器"></a>六、使用代理服务器</h4><h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><ul>
-<li>让服务器以为不是同一个客户端在请求</li>
-<li>防止我们的真实地址被泄露，防止被追究</li>
-</ul>
-<h5 id="使用代理的过程"><a href="#使用代理的过程" class="headerlink" title="使用代理的过程"></a>使用代理的过程</h5><p><img src="../images/%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86%E7%9A%84%E8%BF%87%E7%A8%8B.png" alt="理解使用代理的过程"></p>
-<h5 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h5><ul>
-<li>透明代理(Transparent Proxy)：透明代理虽然可以直接“隐藏”你的IP地址，但是还是可以查到你是谁。</li>
-<li>匿名代理(Anonymous Proxy)：匿名代理比透明代理进步了一点：别人只能知道你用了代理，无法知道你是谁。</li>
-<li>混淆代理(Distorting Proxies)：与匿名代理相同，如果使用了混淆代理，别人还是能知道你在用代理，但是会得到一个假的IP地址，伪装的更逼真</li>
-<li>高匿代理(Elite proxy或High Anonymity Proxy)：可以看出来，高匿代理让别人根本无法发现你是在用代理，所以是最好的选择。</li>
-</ul>
-<blockquote>
-<p>在使用的使用，毫无疑问使用高匿代理效果最好</p>
-<p>从使用的协议：代理ip可以分为http代理，https代理，socket代理等，使用的时候需要根据抓取网站的协议来选择</p>
-</blockquote>
-<h5 id="使用方式-5"><a href="#使用方式-5" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 定义 代理服务器</span></span><br><span class="line">proxies = &#123;</span><br><span class="line">  <span class="string">"http"</span>:<span class="string">"http://IP地址:端口号"</span>,</span><br><span class="line">  <span class="string">"https"</span>:<span class="string">"https://IP地址:端口号"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers,proxies=proxies)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-5"><a href="#代码讲解-5" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
-<p>发送请求时 <strong>proxies</strong> 参数设置代理</p>
-</blockquote>
-<h4 id="七、发送请求携带-Cookies"><a href="#七、发送请求携带-Cookies" class="headerlink" title="七、发送请求携带 Cookies"></a>七、发送请求携带 Cookies</h4><h5 id="使用方式-6"><a href="#使用方式-6" class="headerlink" title="使用方式"></a>使用方式</h5><ol>
-<li>直接在自定义请求头中携带 <code>Cookie</code></li>
-<li>通过请求参数携带 Cookie 对象</li>
-</ol>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 定义请求地址</span></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">  <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">  <span class="comment"># 方式一：直接在请求头中携带Cookie内容</span></span><br><span class="line">  <span class="string">"Cookie"</span>: <span class="string">"Cookie值"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 方式二：定义 cookies 值</span></span><br><span class="line">cookies = &#123;</span><br><span class="line">  <span class="string">"xx"</span>:<span class="string">"yy"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 使用 POST 请求参数发送请求</span></span><br><span class="line">response = requests.get(url,headers=headers,cookies=cookies)</span><br><span class="line"><span class="comment"># 获取响应的 html 内容</span></span><br><span class="line">html = response.text</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-6"><a href="#代码讲解-6" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
-<p>发送请求时 <strong>cookies</strong> 参数携带 <code>Cookies</code></p>
-</blockquote>
-<h4 id="八、错误证书处理"><a href="#八、错误证书处理" class="headerlink" title="八、错误证书处理"></a>八、错误证书处理</h4><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p><img src="../images/12306ssl%E9%94%99%E8%AF%AF.png" alt="img"></p>
-<h5 id="使用方式-7"><a href="#使用方式-7" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://www.12306.cn/mormhweb/"</span></span><br><span class="line"><span class="comment"># 设置忽略证书</span></span><br><span class="line">response = requests.get(url,verify=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-7"><a href="#代码讲解-7" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
-<p>发送请求时 <strong>verify</strong> 参数设置为 <code>False</code> 表示不验证CA证书</p>
-</blockquote>
-<h4 id="九、超时处理"><a href="#九、超时处理" class="headerlink" title="九、超时处理"></a>九、超时处理</h4><h5 id="使用方式-8"><a href="#使用方式-8" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://www.baidu.com"</span></span><br><span class="line"><span class="comment"># 设置超时秒数</span></span><br><span class="line">response = requests.get(url,timeout=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-8"><a href="#代码讲解-8" class="headerlink" title="代码讲解"></a>代码讲解</h5><blockquote>
-<p>发送请求时 <strong>timeout</strong> 参数设置为超时秒数</p>
-</blockquote>
-<h4 id="十、重试处理"><a href="#十、重试处理" class="headerlink" title="十、重试处理"></a>十、重试处理</h4><h5 id="使用方式-9"><a href="#使用方式-9" class="headerlink" title="使用方式"></a>使用方式</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">可以使用第三方模块 retrying 模块</span></span><br><span class="line"><span class="string">1. pip install retrying</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment"># 1. 导入模块</span></span><br><span class="line"><span class="keyword">from</span> retrying <span class="keyword">import</span> retry</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 使用装饰器进行重试设置</span></span><br><span class="line"><span class="comment"># stop_max_attempt_number 表示重试次数</span></span><br><span class="line"><span class="meta">@retry(stop_max_attempt_number=3)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_url</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">"访问url:"</span>,url)</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">    &#125;</span><br><span class="line">    proxies = &#123;</span><br><span class="line">        <span class="string">"http"</span>:<span class="string">"http://124.235.135.210:80"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 设置超时参数</span></span><br><span class="line">    response = requests.get(url,headers=headers,proxies=proxies,timeout=<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">return</span> response.text</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    url = <span class="string">"http://www.baidu.com"</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        html = parse_url(url)</span><br><span class="line">        print(html)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="comment"># 把 url 记录到日志文件中，未来进行手动分析，然后对url进行重新请求</span></span><br><span class="line">        print(e)</span><br></pre></td></tr></table></figure>
-
-<h5 id="代码讲解-9"><a href="#代码讲解-9" class="headerlink" title="代码讲解"></a>代码讲解</h5><ul>
-<li><p>安装 <code>retrying</code> 模块</p>
-<blockquote>
-<p><code>retrying</code> 模块可以通过装饰器模式对某个函数进行监控，如果该函数引发异常就会触发重试操作</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install retrying</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对需要重试的函数进行装饰器设置</p>
-<blockquote>
-<p>通过 <code>@retry(stop_max_attempt_number=重试次数)</code> 参数设置重试次数</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 导入模块</span></span><br><span class="line"><span class="keyword">from</span> retrying <span class="keyword">import</span> retry</span><br><span class="line"><span class="comment"># 2. 装饰器设置重试函数</span></span><br><span class="line"><span class="meta">@retry(stop_max_attempt_number=3)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exec_func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本站因为对requests库进行讲解，所以讲其属性都摆在了一起说明，这可能是前期最冗长的一站了，但是代码都不难，能看到本站文章的有缘人，理解着来看，代码中带有详细的注释</p>
-<ul>
-<li><p><code>requests</code>发送<code>GET</code>请求</p>
-<ul>
-<li><code>params</code> - 参数</li>
-</ul>
-</li>
-<li><p><code>requests</code>发送<code>POST</code>请求</p>
-<ul>
-<li><code>data</code> - 参数</li>
-</ul>
-</li>
-<li><p><code>requests</code>对象的基本属性</p>
-<ul>
-<li><code>content</code> - 获取内容（类型是字节串哦）</li>
-<li><code>text</code> - 获取内容（这个类型就是字符串了哦）</li>
-<li><code>url</code> - 响应地址</li>
-<li><code>headers</code> - 响应头</li>
-</ul>
-</li>
-<li><p><code>requests</code>使用代理服务器发送请求</p>
-<ul>
-<li>需要使用<code>proxies</code>参数</li>
-</ul>
-</li>
-<li><p><code>requests</code>携带<code>Cookies</code>发送请求</p>
-<ul>
-<li><code>cookie</code>可使用单独传参，也可以直接在<code>headers</code>中设置</li>
-<li><code>cookie</code>的作用还是比较重要的，常用于我们的模拟登陆</li>
-</ul>
-</li>
-<li><p><code>requests</code>超时处理</p>
-<ul>
-<li>使用<code>timeout</code>参数</li>
-</ul>
-</li>
-<li><p><code>requests</code>重试处理</p>
-<ul>
-<li>需要先安装<code>retry</code>模块</li>
-<li>使用<code>retrying</code>模块的<code>@retry</code></li>
-</ul>
-</li>
-</ul>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/13/第五站 - 一个让 HTTP 服务人类的Requests库/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -582,7 +397,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChaoS">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/soso.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -617,7 +432,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-22 22:22:36" itemprop="dateModified" datetime="2019-09-22T22:22:36+08:00">2019-09-22</time>
+                <time title="修改时间：2019-09-25 06:03:47" itemprop="dateModified" datetime="2019-09-25T06:03:47+08:00">2019-09-25</time>
               </span>
             
           
@@ -634,38 +449,15 @@
 
       
           <h1 id="第四站-使用系统自带的网络库完成简单的数据抓取"><a href="#第四站-使用系统自带的网络库完成简单的数据抓取" class="headerlink" title="第四站 -  使用系统自带的网络库完成简单的数据抓取"></a>第四站 -  使用系统自带的网络库完成简单的数据抓取</h1><p>本文只针对python3的urllib网络库进行学习讲解（python2中使用urllib2，流程一摸一样，只有小量代码存在微小差异，因为python2已官宣放弃维护，所以作为弟中弟的本人，也就没有进行学习，都是基于python3进行爬虫学习及开发）</p>
-<h2 id="系统网络库"><a href="#系统网络库" class="headerlink" title="系统网络库"></a>系统网络库</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><blockquote>
-<p>通过 <code>Python</code> 代码模拟浏览器客户端发起网络请求获取响应数据，并且进行处理。</p>
-</blockquote>
-<h3 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h3><ol>
-<li><code>Python3</code> 使用 <code>urllib</code> 网络库</li>
-</ol>
-<h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><ol>
-<li>导入模块</li>
-<li>发起请求获取响应<ol>
-<li>定义请求地址</li>
-<li>定义自定义请求头</li>
-<li>定义请求对象</li>
-<li>发送请求</li>
-</ol>
-</li>
-<li>处理响应内容</li>
-</ol>
-<h3 id="Python3"><a href="#Python3" class="headerlink" title="Python3"></a>Python3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 导入模块</span></span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 发起请求获取响应</span></span><br><span class="line"><span class="comment"># 2.1 定义请求地址</span></span><br><span class="line">url = <span class="string">"http://baidu.com"</span></span><br><span class="line"><span class="comment"># 2.2 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 2.3 定义请求对象</span></span><br><span class="line">request = urllib.request.Request(</span><br><span class="line">    url=url,</span><br><span class="line">    headers=headers</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 2.4 发送请求</span></span><br><span class="line">response = urllib.request.urlopen(request)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 处理响应</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'02.html'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(response.read())</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
-<li><p>如果使用在URL中需要进行转义</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 导入模块</span></span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line">   </span><br><span class="line"><span class="comment"># 2. 发起请求获取响应</span></span><br><span class="line">   </span><br><span class="line">wd = input(<span class="string">"请输入查询内容："</span>)</span><br><span class="line">   </span><br><span class="line"><span class="comment"># 2.1 定义请求地址</span></span><br><span class="line">url = <span class="string">"https://www.baidu.com/s?wd="</span></span><br><span class="line"><span class="comment"># 2.2 定义自定义请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 2.3 定义请求对象</span></span><br><span class="line">request = urllib.request.Request(</span><br><span class="line">    url=url + urllib.parse.quote(wd),</span><br><span class="line">    headers=headers</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 2.4 发送请求</span></span><br><span class="line">response = urllib.request.urlopen(request)</span><br><span class="line">   </span><br><span class="line"><span class="comment"># 3. 处理响应</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'02.html'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(response.read())</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.read() 	# 返回值是字节串，获取字符串内容需要进行 decode</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html = response.read().decode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过前面几站的了解，终于迎来了第一次爬取网页的任务，相信大家都跃跃欲试了。跟着步骤练起来吧！</p>
-<p>作为弟中弟的本人偷偷跟大家说：在python的世界中，有许多奇奇怪怪，也十分好用的库与第三方包。系统提供的网络库，在后续基本很少用到，但是基本的流程必须要熟悉起来！</p>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/09/第四站 -  使用系统自带的网络库完成简单的数据抓取/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -694,7 +486,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChaoS">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/soso.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -729,7 +521,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-22 22:22:03" itemprop="dateModified" datetime="2019-09-22T22:22:03+08:00">2019-09-22</time>
+                <time title="修改时间：2019-09-25 06:39:16" itemprop="dateModified" datetime="2019-09-25T06:39:16+08:00">2019-09-25</time>
               </span>
             
           
@@ -746,23 +538,15 @@
 
       
           <h1 id="第三站-初识chrome（谷歌）浏览器"><a href="#第三站-初识chrome（谷歌）浏览器" class="headerlink" title="第三站 - 初识chrome（谷歌）浏览器"></a>第三站 - 初识chrome（谷歌）浏览器</h1><p>为什么chrome（谷歌）浏览器能成为大部分开发人员比较青睐的浏览器呢？那么我们下面来简要介绍一下使用chrome浏览器调试面板的基本情况吧，当看完你会发现，chrome浏览器确实是有一定实力的</p>
-<h2 id="chrome-网络调试面板详情"><a href="#chrome-网络调试面板详情" class="headerlink" title="chrome 网络调试面板详情"></a>chrome 网络调试面板详情</h2><p><img src="../images/chrome%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E8%B0%83%E8%AF%95.png" alt="chrome网络请求调试"></p>
-<h2 id="请求分析流程"><a href="#请求分析流程" class="headerlink" title="请求分析流程"></a>请求分析流程</h2><p><img src="../images/chrome%E8%AF%B7%E6%B1%82%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B.png" alt="chrome请求分析流程"></p>
-<ol>
-<li>找寻 URL 地址</li>
-<li>确定 请求方式</li>
-<li>获取 请求参数</li>
-<li>获取 请求头</li>
-</ol>
-<p>从上述的图片中可以看出，chrome浏览器的确为我们提供了一个很方便、很直观的展示数据的平台，让开发人员快速的定位自己想要的数据接口。当然，不一定是chrome，其他浏览器（比如firefox等）都可以实现上述功能</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>Network面板使用</li>
-<li>记录请求日志</li>
-<li>请求过滤</li>
-<li>请求列表查看</li>
-<li>请求详情查看</li>
-</ul>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/06/第三站 - 初识chrome（谷歌）浏览器/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -791,7 +575,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChaoS">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/soso.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -826,7 +610,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-22 22:21:32" itemprop="dateModified" datetime="2019-09-22T22:21:32+08:00">2019-09-22</time>
+                <time title="修改时间：2019-09-25 06:40:35" itemprop="dateModified" datetime="2019-09-25T06:40:35+08:00">2019-09-25</time>
               </span>
             
           
@@ -854,230 +638,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h2><h3 id="一、-HTTP-请求流程"><a href="#一、-HTTP-请求流程" class="headerlink" title="一、 HTTP 请求流程"></a>一、 HTTP 请求流程</h3><p><img src="../images/http%E5%8F%91%E9%80%81%E7%9A%84%E8%BF%87%E7%A8%8B.png" alt="img"></p>
-<ol>
-<li>浏览器通过域名解析服务器（DNS）获取IP地址</li>
-<li>浏览器先向IP发起请求，并获取相应</li>
-<li>在返回的响应内容（html）中，会带有css、js、图片等url地址，以及ajax代码，浏览器按照响应内容中的顺序依次发送其他的请求，并获取相应的响应</li>
-<li>浏览器每获取一个响应就对展示出的结果进行添加（加载），js，css等内容会修改页面的内容，js也可以重新发送请求，获取响应</li>
-<li>从获取第一个响应并在浏览器中展示，直到最终获取全部响应，并在展示的结果中添加内容或修改————这个过程叫做浏览器的<strong>渲染</strong></li>
-</ol>
-<h3 id="二、-URL-地址格式"><a href="#二、-URL-地址格式" class="headerlink" title="二、 URL 地址格式"></a>二、 URL 地址格式</h3><p><img src="../images/http%E7%9A%84url%E8%A7%84%E5%88%99.jpg" alt="http的url规则"></p>
-<h5 id="格式说明"><a href="#格式说明" class="headerlink" title="格式说明:"></a>格式说明:</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme:<span class="comment">//host[:port]/path/…/[?query-string][#anchor]</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>scheme</strong>：协议（例如：http, https, ftp）</li>
-<li><strong>host</strong>：服务器的IP地址或者域名</li>
-<li><strong>port</strong>：服务器的端口（如果是走协议默认端口，缺省端口80）</li>
-<li><strong>path</strong>：访问资源的路径</li>
-<li><strong>query-string</strong>：参数，发送给http服务器的数据</li>
-<li><strong>anchor</strong>：锚（跳转到网页的指定锚点位置）<ul>
-<li><strong>注意：锚点的跳转并不会刷新页面！！</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="三、-HTTP-请求"><a href="#三、-HTTP-请求" class="headerlink" title="三、 HTTP 请求"></a>三、 HTTP 请求</h3><h5 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h5><p><img src="../images/%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE%E6%A0%BC%E5%BC%8F.png" alt="请求协议格式"></p>
-<h5 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h5><p><img src="../images/%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE%E6%A1%88%E4%BE%8B.jpg" alt="请求协议案例"></p>
-<h5 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h5><blockquote>
-<p>根据HTTP标准，HTTP请求可以使用多种请求方法。</p>
-<p>HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。</p>
-<p>HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="center">请求方式</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">GET</td>
-<td align="left">请求指定的页面信息，并返回实体主体。</td>
-</tr>
-<tr>
-<td align="center">HEAD</td>
-<td align="left">类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
-</tr>
-<tr>
-<td align="center">POST</td>
-<td align="left">向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。</td>
-</tr>
-<tr>
-<td align="center">PUT</td>
-<td align="left">从客户端向服务器传送的数据取代指定的文档的内容。</td>
-</tr>
-<tr>
-<td align="center">DELETE</td>
-<td align="left">请求服务器删除指定的页面。</td>
-</tr>
-<tr>
-<td align="center">CONNECT</td>
-<td align="left">HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</td>
-</tr>
-<tr>
-<td align="center">OPTIONS</td>
-<td align="left">允许客户端查看服务器的性能。</td>
-</tr>
-<tr>
-<td align="center">TRACE</td>
-<td align="left">回显服务器收到的请求，主要用于测试或诊断。</td>
-</tr>
-</tbody></table>
-<h3 id="常见请求头"><a href="#常见请求头" class="headerlink" title="常见请求头"></a>常见请求头</h3><table>
-<thead>
-<tr>
-<th align="left">请求头</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>Cookie</strong></td>
-<td align="left">Cookie</td>
-</tr>
-<tr>
-<td align="left"><strong>User-Agent</strong></td>
-<td align="left">浏览器名称</td>
-</tr>
-<tr>
-<td align="left"><strong>Referer</strong></td>
-<td align="left">页面跳转处</td>
-</tr>
-<tr>
-<td align="left">Host</td>
-<td align="left">主机和端口号</td>
-</tr>
-<tr>
-<td align="left">Connection</td>
-<td align="left">链接类型</td>
-</tr>
-<tr>
-<td align="left">Upgrade-Insecure-Requests</td>
-<td align="left">升级为 <code>HTTPS</code> 请求</td>
-</tr>
-<tr>
-<td align="left">Accept</td>
-<td align="left">传输文件类型</td>
-</tr>
-<tr>
-<td align="left">Accept-Encoding</td>
-<td align="left">文件编解码格式</td>
-</tr>
-<tr>
-<td align="left">x-requested-with : XMLHttpRequest</td>
-<td align="left">ajax 请求</td>
-</tr>
-</tbody></table>
-<p><a href="../附录/HTTP请求列表.html">点击更多</a></p>
-<h3 id="四、-HTTP-响应"><a href="#四、-HTTP-响应" class="headerlink" title="四、 HTTP 响应"></a>四、 HTTP 响应</h3><h4 id="响应格式"><a href="#响应格式" class="headerlink" title="响应格式"></a>响应格式</h4><blockquote>
-<p>HTTP响应也由<strong>四</strong>个部分组成，分别是：<strong>状态行</strong>、<strong>消息报头</strong>、<strong>空行（回车符 + 换行符）</strong>和<strong>响应正文</strong>。</p>
-</blockquote>
-<p><img src="../images/%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F.jpg" alt="响应格式"></p>
-<h4 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h4><table>
-<thead>
-<tr>
-<th align="left">请求头</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>Location</strong></td>
-<td align="left">这个头配合302状态码使用，告诉用户端找谁。</td>
-</tr>
-<tr>
-<td align="left"><strong>Set-Cookie</strong></td>
-<td align="left">设置和页面关联的Cookie</td>
-</tr>
-<tr>
-<td align="left">Content-Type</td>
-<td align="left">服务器通过这个头，回送数据的类型</td>
-</tr>
-<tr>
-<td align="left">Server</td>
-<td align="left">服务器通过这个头，告诉浏览器服务器的类型</td>
-</tr>
-<tr>
-<td align="left">Content-Length</td>
-<td align="left">服务器通过这个头，告诉浏览器回送数据的长度。</td>
-</tr>
-<tr>
-<td align="left">Connection</td>
-<td align="left">服务器通过这个头，响应完是保持链接还是关闭链接。</td>
-</tr>
-</tbody></table>
-<h4 id="HTTP-状态码"><a href="#HTTP-状态码" class="headerlink" title="HTTP 状态码"></a>HTTP 状态码</h4><blockquote>
-<p>当浏览者访问一个网页时，浏览者的浏览器会向网页所在服务器发出请求。当浏览器接收并显示网页前，此网页所在的服务器会返回一个包含HTTP状态码的信息头（server header）用以响应浏览器的请求。</p>
-<p>HTTP状态码的英文为HTTP Status Code。</p>
-<p>HTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字没有分类的作用。HTTP 状态码共分为5种类型</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="center">分类</th>
-<th align="left">分类描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1**</td>
-<td align="left">信息，服务器收到请求，需要请求者继续执行操作</td>
-</tr>
-<tr>
-<td align="center">2**</td>
-<td align="left">成功，操作被成功接收并处理</td>
-</tr>
-<tr>
-<td align="center">3**</td>
-<td align="left">重定向，需要进一步的操作以完成请求</td>
-</tr>
-<tr>
-<td align="center">4**</td>
-<td align="left">客户端错误，请求包含语法错误或无法完成请求</td>
-</tr>
-<tr>
-<td align="center">5**</td>
-<td align="left">服务器错误，服务器在处理请求的过程中发生了错误</td>
-</tr>
-</tbody></table>
-<ul>
-<li>常见的HTTP状态码：<ul>
-<li>200 - 请求成功</li>
-<li>301 - 资源（网页等）被永久转移到其它URL</li>
-<li>404 - 请求的资源（网页等）不存在</li>
-<li>500 - 内部服务器错误</li>
-</ul>
-</li>
-</ul>
-<h2 id="HTTPS协议"><a href="#HTTPS协议" class="headerlink" title="HTTPS协议"></a>HTTPS协议</h2><h3 id="HTTPS-作用"><a href="#HTTPS-作用" class="headerlink" title="HTTPS 作用"></a>HTTPS 作用</h3><blockquote>
-<p>在 <strong>传输过程中</strong> 对数据进行加密，防止中间路由器、交换机等中间的路由设备对数据进行篡改。</p>
-</blockquote>
-<h3 id="HTTP-与-HTTPS-优缺点"><a href="#HTTP-与-HTTPS-优缺点" class="headerlink" title="HTTP 与 HTTPS 优缺点"></a>HTTP 与 HTTPS 优缺点</h3><blockquote>
-<p>HTTP 因为不需要对数据进行加密所以性能更高，但是安全性差。</p>
-<p>HTTPS 虽然安全性高，但是因为浏览器和服务器端需要对数据进行加解密，所以占用服务器资源。</p>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>了解 HTTP 的概念<ul>
-<li>超文本传输协议</li>
-</ul>
-</li>
-<li>掌握 HTTP 请求过程<ul>
-<li><code>域名</code> =&gt; <code>DNS</code> =&gt; <code>IP</code> =&gt; <code>内容</code></li>
-</ul>
-</li>
-<li>掌握 HTTP 请求格式</li>
-<li>掌握 HTTP 响应格式</li>
-<li>掌握 HTTP 常见头<ul>
-<li>User-Agent</li>
-<li>Referer</li>
-<li>Cookies</li>
-</ul>
-</li>
-<li>掌握 HTTP 常见响应状态码<ul>
-<li>200</li>
-<li>404</li>
-<li>500</li>
-</ul>
-</li>
-</ul>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/04/第二站 - http与https的简要介绍/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1106,7 +675,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChaoS">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/soso.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1141,7 +710,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-22 22:20:36" itemprop="dateModified" datetime="2019-09-22T22:20:36+08:00">2019-09-22</time>
+                <time title="修改时间：2019-09-25 06:03:27" itemprop="dateModified" datetime="2019-09-25T06:03:27+08:00">2019-09-25</time>
               </span>
             
           
@@ -1161,43 +730,15 @@
 <p>网络爬虫（又被称为网页蜘蛛，网络机器人）就是<strong>模拟浏览器发送网络请求，接收请求响应</strong>，一种按照一定的规则，自动地抓取互联网信息的程序。</p>
 <p>原则上,只要是浏览器(客户端)能做的事情，爬虫都能够做</p>
 </blockquote>
-<h2 id="爬虫的分类"><a href="#爬虫的分类" class="headerlink" title="爬虫的分类"></a>爬虫的分类</h2><ul>
-<li><code>通用爬虫</code>：通常指搜索引擎的爬虫</li>
-<li><code>聚焦爬虫</code>：针对特定网站的爬虫</li>
-</ul>
-<h2 id="爬虫的用途"><a href="#爬虫的用途" class="headerlink" title="爬虫的用途"></a>爬虫的用途</h2><ul>
-<li>百度新闻</li>
-<li>网易云音乐</li>
-<li>12306抢票</li>
-<li>网站自动投票</li>
-<li>短信轰炸(<strong>你们看不见看不见，别学坏了。这个不是爬虫用途的重点！！！</strong>)<ul>
-<li><a href="https://hwid1.vmall.com/CAS/portal/userRegister/regbyphone.html?reqClientType=1&loginChannel=1000002&countryCode=cn&loginUrl=https%3A%2F%2Fhwid1.vmall.com%2FCAS%2Fportal%2FcloudLogin.html&service=https%3A%2F%2Fwww.hicloud.com%3A443%2Fothers%2Flogin.action&lang=zh-cn&themeName=red" target="_blank" rel="noopener">注册页面1</a></li>
-<li><a href="https://bcy.net/register" target="_blank" rel="noopener">注册页面2</a></li>
-<li><a href="http://member.chinaacc.com/member/register.shtm" target="_blank" rel="noopener">注册页面3</a></li>
-</ul>
-</li>
-<li>等等</li>
-</ul>
-<h2 id="爬虫的流程"><a href="#爬虫的流程" class="headerlink" title="爬虫的流程"></a>爬虫的流程</h2><ol>
-<li>向起始url发送请求，并获取响应</li>
-<li>对响应进行提取</li>
-<li>如果提取url，则继续发送请求获取响应</li>
-<li>如果提取数据，则将数据进行保存</li>
-</ol>
-<h2 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h2><p>Robots协议：网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取，但它仅仅是道德层面上的约束</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>第一站的学习，我们应该知道爬虫的基本概念、爬虫的分类、以及爬虫的整体流程</p>
-<ul>
-<li><code>爬虫概念</code>：模拟浏览器发送网络请求，接收请求响应。只要是浏览器(客户端)能做的事情，爬虫都能够做。</li>
-<li><code>爬虫的分类</code>：聚焦爬虫、通用爬虫</li>
-<li><code>爬虫的流程</code>：<ol>
-<li>向起始url发送请求，并获取响应</li>
-<li>对响应进行提取</li>
-<li>如果提取url，则继续发送请求获取响应</li>
-<li>如果提取数据，则将数据进行保存</li>
-</ol>
-</li>
-</ul>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/10/01/第一站 - 爬虫预备知识/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1226,7 +767,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChaoS">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/soso.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1335,6 +876,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/soso.jpg"
+      alt="ChaoS">
   <p class="site-author-name" itemprop="name">ChaoS</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -1352,6 +896,10 @@
       
       <div class="site-state-item site-state-tags">
         
+          
+            <a href="/tags/">
+          
+        
         
         
           
@@ -1360,7 +908,7 @@
         
         <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
-        
+        </a>
       </div>
     
   </nav>
@@ -1387,7 +935,7 @@
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
 
         
 
@@ -1412,7 +960,8 @@
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
-<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
 <script src="/js/next-boot.js?v=7.3.0"></script>
 
 
