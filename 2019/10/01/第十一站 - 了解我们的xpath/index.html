@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="第十一站 - 了解我们的xpathXPath 介绍与语法定义XPath (XML Path Language) 是一门在 HTML\XML 文档中查找信息的语言，可用来在 HTML\XML 文档中对元素和属性进行遍历。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChaoS-World">
+<meta property="og:url" content="http://yoursite.com/2019/10/01/第十一站 - 了解我们的xpath/index.html">
+<meta property="og:site_name" content="ChaoS-World">
+<meta property="og:description" content="第十一站 - 了解我们的xpathXPath 介绍与语法定义XPath (XML Path Language) 是一门在 HTML\XML 文档中查找信息的语言，可用来在 HTML\XML 文档中对元素和属性进行遍历。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-22T23:36:09.664Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ChaoS-World">
+<meta name="twitter:description" content="第十一站 - 了解我们的xpathXPath 介绍与语法定义XPath (XML Path Language) 是一门在 HTML\XML 文档中查找信息的语言，可用来在 HTML\XML 文档中对元素和属性进行遍历。">
+  <link rel="canonical" href="http://yoursite.com/2019/10/01/第十一站 - 了解我们的xpath/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title> | ChaoS-World</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChaoS-World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/01/第十一站 - 了解我们的xpath/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChaoS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/soso.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChaoS-World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-01 21:49:35" itemprop="dateCreated datePublished" datetime="2019-10-01T21:49:35+08:00">2019-10-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-23 07:36:09" itemprop="dateModified" datetime="2019-09-23T07:36:09+08:00">2019-09-23</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="第十一站-了解我们的xpath"><a href="#第十一站-了解我们的xpath" class="headerlink" title="第十一站 - 了解我们的xpath"></a>第十一站 - 了解我们的xpath</h1><h2 id="XPath-介绍与语法"><a href="#XPath-介绍与语法" class="headerlink" title="XPath 介绍与语法"></a>XPath 介绍与语法</h2><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>XPath (XML Path Language) 是一门在 HTML\XML 文档中查找信息的语言，可用来在 HTML\XML 文档中对元素和属性进行遍历。</p><a id="more"></a>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p>通过一定的语法规则从 HTML/XML 文件中提取数据。</p>
+<h4 id="语法学习调试环境搭建"><a href="#语法学习调试环境搭建" class="headerlink" title="语法学习调试环境搭建"></a>语法学习调试环境搭建</h4><blockquote>
+<p>下载插件</p>
+</blockquote>
+<ul>
+<li>使用 Chrome 插件<code>XPath Helper</code></li>
+<li>Firfox 插件 <code>XPath Checker</code></li>
+</ul>
+<p><strong>注意：</strong> 这些工具是用来<strong>学习xpath语法</strong>的，他们都是从elements中匹配数据，elements中的数据和url地址对应的响应不相同，所以在代码中，不建议使用这些工具进行数据的提取</p>
+<blockquote>
+<p><strong>环境搭建</strong></p>
+</blockquote>
+<ul>
+<li><p>创建 HTML 测试文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>语法学习<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bookstore</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">book</span> <span class="attr">category</span>=<span class="string">"COOKING"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">title</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span>Everyday Italian<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">author</span>&gt;</span>Giada De Laurentiis<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">year</span>&gt;</span>2005<span class="tag">&lt;/<span class="name">year</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">price</span>&gt;</span>30.00<span class="tag">&lt;/<span class="name">price</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">book</span> <span class="attr">category</span>=<span class="string">"CHILDREN"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">title</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span>Harry Potter<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">author</span>&gt;</span>J K. Rowling<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">year</span>&gt;</span>2005<span class="tag">&lt;/<span class="name">year</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">price</span>&gt;</span>29.99<span class="tag">&lt;/<span class="name">price</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">book</span> <span class="attr">category</span>=<span class="string">"WEB"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">title</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span>Learning XML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">author</span>&gt;</span>Erik T. Ray<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">year</span>&gt;</span>2003<span class="tag">&lt;/<span class="name">year</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">price</span>&gt;</span>39.95<span class="tag">&lt;/<span class="name">price</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bookstore</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="XPath-语法"><a href="#XPath-语法" class="headerlink" title="XPath 语法"></a>XPath 语法</h4><h5 id="基本语法使用"><a href="#基本语法使用" class="headerlink" title="基本语法使用"></a>基本语法使用</h5><blockquote>
+<p><strong>语法说明</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>nodename</code></td>
+<td align="left">选取元素</td>
+</tr>
+<tr>
+<td align="left"><code>/</code></td>
+<td align="left">从根节点选取、或者是元素和元素间的过渡。</td>
+</tr>
+<tr>
+<td align="left"><code>//</code></td>
+<td align="left">从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置。</td>
+</tr>
+<tr>
+<td align="left"><code>.</code></td>
+<td align="left">选取当前节点。</td>
+</tr>
+<tr>
+<td align="left"><code>..</code></td>
+<td align="left">选取当前节点的父节点。</td>
+</tr>
+<tr>
+<td align="left"><code>@</code></td>
+<td align="left">选取属性。</td>
+</tr>
+<tr>
+<td align="left"><code>text()</code></td>
+<td align="left">选取文本。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>案例</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">表达式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">bookstore</td>
+<td align="left">选择bookstore元素。</td>
+</tr>
+<tr>
+<td align="left">/bookstore</td>
+<td align="left">选取根元素 bookstore。注释：假如路径起始于正斜杠( / )，则此路径始终代表到某元素的绝对路径！</td>
+</tr>
+<tr>
+<td align="left">bookstore/book</td>
+<td align="left">选取属于 bookstore 的子元素的所有 book 元素。</td>
+</tr>
+<tr>
+<td align="left">//book</td>
+<td align="left">选取所有 book 子元素，而不管它们在文档中的位置。</td>
+</tr>
+<tr>
+<td align="left">bookstore//book</td>
+<td align="left">选择属于 bookstore 元素的后代的所有 book 元素，而不管它们位于 bookstore 之下的什么位置。</td>
+</tr>
+<tr>
+<td align="left">bookstore//book</td>
+<td align="left">选择属于 bookstore 元素的后代的所有 book 元素，而不管它们位于 bookstore 之下的什么位置。</td>
+</tr>
+<tr>
+<td align="left">//book/title/@lang</td>
+<td align="left">选择所有的book下面的title中的lang属性的值。</td>
+</tr>
+<tr>
+<td align="left">//book/title/text()</td>
+<td align="left">选择所有的book下面的title的文本。</td>
+</tr>
+</tbody></table>
+<h5 id="查找特定的节点"><a href="#查找特定的节点" class="headerlink" title="查找特定的节点"></a>查找特定的节点</h5><table>
+<thead>
+<tr>
+<th align="left">路径表达式</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">//title[@lang=”eng”]</td>
+<td align="left">选择lang属性值为eng的所有title元素</td>
+</tr>
+<tr>
+<td align="left">/bookstore/book[1]</td>
+<td align="left">选取属于 bookstore 子元素的第一个 book 元素。</td>
+</tr>
+<tr>
+<td align="left">/bookstore/book[last()]</td>
+<td align="left">选取属于 bookstore 子元素的最后一个 book 元素。</td>
+</tr>
+<tr>
+<td align="left">/bookstore/book[last()-1]</td>
+<td align="left">选取属于 bookstore 子元素的倒数第二个 book 元素。</td>
+</tr>
+<tr>
+<td align="left">/bookstore/book[position()&gt;1]</td>
+<td align="left">选择bookstore下面的book元素，从第二个开始选择</td>
+</tr>
+<tr>
+<td align="left">//book/title[text()=’Harry Potter’]</td>
+<td align="left">选择所有book下的title元素，仅仅选择文本为Harry Potter的title元素</td>
+</tr>
+<tr>
+<td align="left">//book/title[contains(text(),’rry’)]</td>
+<td align="left">选择所有book下的title元素，仅仅选择文本 包含 <code>rry</code> 的title元素</td>
+</tr>
+<tr>
+<td align="left">//book/title[starts-with(text(),’Harry’)]</td>
+<td align="left">选择所有book下的title元素，仅仅选择文本 以 <code>Harry</code> 开头的title元素</td>
+</tr>
+<tr>
+<td align="left">/bookstore/book[price&gt;35.00]/title</td>
+<td align="left">选取 bookstore 元素中的 book 元素的所有 title 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+</tbody></table>
+<p><strong>注意点：</strong>在xpath中，第一个元素的位置是1，最后一个元素的位置是last(),倒数第二个是last()-1</p>
+<h5 id="选取未知节点"><a href="#选取未知节点" class="headerlink" title="选取未知节点"></a>选取未知节点</h5><blockquote>
+<p><strong>语法</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">通配符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>*</code></td>
+<td align="left">匹配任何元素节点。</td>
+</tr>
+<tr>
+<td align="left"><code>@*</code></td>
+<td align="left">匹配任何属性节点。</td>
+</tr>
+<tr>
+<td align="left"><code>node()</code></td>
+<td align="left">匹配任何类型的节点。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">路径表达式</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">/bookstore/*</td>
+<td align="left">选取 bookstore 元素的所有子元素。</td>
+</tr>
+<tr>
+<td align="left">//*</td>
+<td align="left">选取文档中的所有元素。</td>
+</tr>
+<tr>
+<td align="left">//title[@*]</td>
+<td align="left">选取所有带有属性的 title 元素。</td>
+</tr>
+</tbody></table>
+<h5 id="选取若干路径"><a href="#选取若干路径" class="headerlink" title="选取若干路径"></a>选取若干路径</h5><p>通过在路径表达式中使用“|”运算符，您可以选取若干个路径。</p>
+<blockquote>
+<p><strong>实例</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">路径表达式</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">//book/title | //book/price</td>
+<td align="left">选取 book 元素的所有 title 和 price 元素。</td>
+</tr>
+<tr>
+<td align="left">//title | //price</td>
+<td align="left">选取文档中的所有 title 和 price 元素。</td>
+</tr>
+<tr>
+<td align="left">/bookstore/book/title | //price</td>
+<td align="left">选取属于 bookstore 元素的 book 元素的所有 title 元素，以及文档中所有的 price 元素。</td>
+</tr>
+</tbody></table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>xpath 基本语法<ul>
+<li><code>/</code> 节点选择</li>
+<li><code>//</code> 子孙节点选择</li>
+<li><code>.</code> 当前节点</li>
+<li><code>..</code> 上一级节点</li>
+<li><code>text()</code> 获取文本内容</li>
+<li><code>@属性</code> 获取属性值</li>
+</ul>
+</li>
+<li>xpath 节点选择<ul>
+<li><code>//nodename[数字]</code> 通过下标节点选择</li>
+<li><code>//nodename[@属性=&quot;值&quot;]</code> 通过属性值选择节点</li>
+<li><code>//nodename[text()=&quot;值&quot;]</code> 通过文本内容节点选择</li>
+<li><code>//nodename[last()]</code> 通过内置函数节点选择</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/01/第十站 - 数据的提取及分类/" rel="next" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第十一站-了解我们的xpath"><span class="nav-number">1.</span> <span class="nav-text">第十一站 - 了解我们的xpath</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XPath-介绍与语法"><span class="nav-number">1.1.</span> <span class="nav-text">XPath 介绍与语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语法学习调试环境搭建"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">语法学习调试环境搭建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XPath-语法"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">XPath 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本语法使用"><span class="nav-number">1.1.0.4.1.</span> <span class="nav-text">基本语法使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查找特定的节点"><span class="nav-number">1.1.0.4.2.</span> <span class="nav-text">查找特定的节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#选取未知节点"><span class="nav-number">1.1.0.4.3.</span> <span class="nav-text">选取未知节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#选取若干路径"><span class="nav-number">1.1.0.4.4.</span> <span class="nav-text">选取若干路径</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/soso.jpg"
+      alt="ChaoS">
+  <p class="site-author-name" itemprop="name">ChaoS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChaoS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="第八站 - 使用js逆向实现百度翻译小爬虫1. 分析分析流程图 问题：因为一个 query 参数对应一个sign 所以无法解决自定义query问题。 解决方案：切换到手机端 现在手机端也已经有 sign 验证机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChaoS-World">
+<meta property="og:url" content="http://yoursite.com/2019/10/01/第八站 - 使用js逆向实现百度翻译小爬虫/index.html">
+<meta property="og:site_name" content="ChaoS-World">
+<meta property="og:description" content="第八站 - 使用js逆向实现百度翻译小爬虫1. 分析分析流程图 问题：因为一个 query 参数对应一个sign 所以无法解决自定义query问题。 解决方案：切换到手机端 现在手机端也已经有 sign 验证机制">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-22T23:18:14.340Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ChaoS-World">
+<meta name="twitter:description" content="第八站 - 使用js逆向实现百度翻译小爬虫1. 分析分析流程图 问题：因为一个 query 参数对应一个sign 所以无法解决自定义query问题。 解决方案：切换到手机端 现在手机端也已经有 sign 验证机制">
+  <link rel="canonical" href="http://yoursite.com/2019/10/01/第八站 - 使用js逆向实现百度翻译小爬虫/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title> | ChaoS-World</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ChaoS-World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/01/第八站 - 使用js逆向实现百度翻译小爬虫/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ChaoS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/soso.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ChaoS-World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-01 21:49:35" itemprop="dateCreated datePublished" datetime="2019-10-01T21:49:35+08:00">2019-10-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-23 07:18:14" itemprop="dateModified" datetime="2019-09-23T07:18:14+08:00">2019-09-23</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="第八站-使用js逆向实现百度翻译小爬虫"><a href="#第八站-使用js逆向实现百度翻译小爬虫" class="headerlink" title="第八站 - 使用js逆向实现百度翻译小爬虫"></a>第八站 - 使用js逆向实现百度翻译小爬虫</h1><h3 id="1-分析"><a href="#1-分析" class="headerlink" title="1. 分析"></a>1. 分析</h3><h4 id="分析流程图"><a href="#分析流程图" class="headerlink" title="分析流程图"></a>分析流程图</h4><ul>
+<li><strong>问题：</strong>因为一个 <code>query</code> 参数对应一个<code>sign</code> 所以无法解决自定义<code>query</code>问题。</li>
+<li><strong>解决方案：</strong>切换到手机端<ul>
+<li>现在手机端也已经有 <code>sign</code> 验证机制</li>
+</ul>
+</li>
+</ul><a id="more"></a>
+<h2 id="解决方案之JS逆向"><a href="#解决方案之JS逆向" class="headerlink" title="解决方案之JS逆向"></a>解决方案之JS逆向</h2><h3 id="逆向流程"><a href="#逆向流程" class="headerlink" title="逆向流程"></a>逆向流程</h3><ol>
+<li>寻找请求发起代码<ol>
+<li>寻找 url 地址，获取关键字</li>
+<li>通过 <code>search all</code> 搜索关键字找到出现的位置</li>
+</ol>
+</li>
+<li>添加断点确定代码执行</li>
+<li>代码向上逆向寻找关键点</li>
+<li>用 <code>js2py</code> 模拟代码执行获取想要的结果</li>
+</ol>
+<h3 id="实现结果"><a href="#实现结果" class="headerlink" title="实现结果"></a>实现结果</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第0步，进行参数分析</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">url-https://fanyi.baidu.com/basetrans</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">POST</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">params-</span></span><br><span class="line"><span class="string">from: en</span></span><br><span class="line"><span class="string">to: zh</span></span><br><span class="line"><span class="string">query: no</span></span><br><span class="line"><span class="string">transtype: translang</span></span><br><span class="line"><span class="string">simple_means_flag: 3</span></span><br><span class="line"><span class="string">sign: 923821.719772</span></span><br><span class="line"><span class="string">token: d36a9bf0ec207f1334db285c6d94aa7b</span></span><br><span class="line"><span class="string">headers-</span></span><br><span class="line"><span class="string">user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1x-requested-with: XMLHttpRequest</span></span><br><span class="line"><span class="string">cookie: BAIDUID=C8C2F1C3C40089AF37CED401B4EAE9AA:FG=1; BIDUPSID=C8C2F1C3C40089AF37CED401B4EAE9AA; PSTM=1552465004; REALTIME_TRANS_SWITCH=1; FANYI_WORD_SWITCH=1; HISTORY_SWITCH=1; SOUND_SPD_SWITCH=1; SOUND_PREFER_SWITCH=1; delPer=0; H_PS_PSSID=1436_21112_18560_29522_29721_29568_29220_26350; PSINO=7; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; locale=zh; Hm_lvt_64ecd82404c51e03dc91cb9e8c025574=1566456143,1569016405; Hm_lpvt_64ecd82404c51e03dc91cb9e8c025574=1569016405; to_lang_often=%5B%7B%22value%22%3A%22en%22%2C%22text%22%3A%22%u82F1%u8BED%22%7D%2C%7B%22value%22%3A%22zh%22%2C%22text%22%3A%22%u4E2D%u6587%22%7D%5D; __yjsv5_shitong=1.0_7_ecd114fffdbfe79d4bbd1a2f0190894dae20_300_1569016405188_113.116.171.170_73b25bfb; yjs_js_security_passport=067331f9e2af66bf60fac40453cf5f8d5a5bece6_1569016405_js; from_lang_often=%5B%7B%22value%22%3A%22zh%22%2C%22text%22%3A%22%u4E2D%u6587%22%7D%2C%7B%22value%22%3A%22en%22%2C%22text%22%3A%22%u82F1%u8BED%22%7D%5D</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第1步，按照分析导入我们需要用到的包</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> js2py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立上下文管理器对象</span></span><br><span class="line">context = js2py.EvalJs()</span><br><span class="line"><span class="comment"># 将我们js逆向推出的加密代码，直接粘贴到"bdfy.js"文件中，然后执行</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"bdfy.js"</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    context.execute(f.read())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取我们需要翻译的单词</span></span><br><span class="line">word = input(<span class="string">"请输入你的单词:"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用js加密代码，对单词进行sign加密</span></span><br><span class="line">sign = context.a(word)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送req请求</span></span><br><span class="line">req = requests.post(</span><br><span class="line">    url=<span class="string">"https://fanyi.baidu.com/basetrans"</span>,</span><br><span class="line">    headers=&#123;</span><br><span class="line">        <span class="string">"user-agent"</span>: <span class="string">"Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1x-requested-with: XMLHttpRequest"</span>,</span><br><span class="line">        <span class="string">"referer"</span>: <span class="string">"https://fanyi.baidu.com/?aldtype=16047"</span>,</span><br><span class="line">        <span class="string">"cookie"</span>: <span class="string">"BAIDUID=C8C2F1C3C40089AF37CED401B4EAE9AA:FG=1; BIDUPSID=C8C2F1C3C40089AF37CED401B4EAE9AA; PSTM=1552465004; REALTIME_TRANS_SWITCH=1; FANYI_WORD_SWITCH=1; HISTORY_SWITCH=1; SOUND_SPD_SWITCH=1; SOUND_PREFER_SWITCH=1; delPer=0; H_PS_PSSID=1436_21112_18560_29522_29721_29568_29220_26350; PSINO=7; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; locale=zh; to_lang_often=%5B%7B%22value%22%3A%22en%22%2C%22text%22%3A%22%u82F1%u8BED%22%7D%2C%7B%22value%22%3A%22zh%22%2C%22text%22%3A%22%u4E2D%u6587%22%7D%5D; from_lang_often=%5B%7B%22value%22%3A%22zh%22%2C%22text%22%3A%22%u4E2D%u6587%22%7D%2C%7B%22value%22%3A%22en%22%2C%22text%22%3A%22%u82F1%u8BED%22%7D%5D; __yjsv5_shitong=1.0_7_ecd114fffdbfe79d4bbd1a2f0190894dae20_300_1569017296458_113.116.171.170_fe061213; Hm_lvt_afd111fa62852d1f37001d1f980b6800=1569017133,1569017311; Hm_lpvt_afd111fa62852d1f37001d1f980b6800=1569017311; Hm_lvt_64ecd82404c51e03dc91cb9e8c025574=1566456143,1569016405,1569017295,1569017311; Hm_lpvt_64ecd82404c51e03dc91cb9e8c025574=1569017311; yjs_js_security_passport=1726872a4fb37311707307cea12c3e47cb709478_1569017315_js"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    data=&#123;</span><br><span class="line">        <span class="string">"query"</span>: word,</span><br><span class="line">        <span class="string">"from"</span>: <span class="string">"en"</span>,</span><br><span class="line">        <span class="string">"to"</span>: <span class="string">"zh"</span>,</span><br><span class="line">        <span class="string">"token"</span>: <span class="string">"d36a9bf0ec207f1334db285c6d94aa7b"</span>,</span><br><span class="line">        <span class="string">"sign"</span>: sign,</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取我们的翻译结果并打印输出</span></span><br><span class="line">res = req.json()</span><br><span class="line">print(<span class="string">"翻译结果为:"</span>, res[<span class="string">'phonetic'</span>][<span class="number">0</span>][<span class="string">'src_str'</span>])</span><br></pre></td></tr></table></figure>
+
+<p><code>bdyf.js</code>文件详情</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二次报错缘由，n 未定义</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">n</span>(<span class="params">r, o</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> t = <span class="number">0</span>; t &lt; o.length - <span class="number">2</span>; t += <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> e = o.charAt(t + <span class="number">2</span>);</span><br><span class="line">        e = e &gt;= <span class="string">"a"</span> ? e.charCodeAt(<span class="number">0</span>) - <span class="number">87</span> : <span class="built_in">Number</span>(e),</span><br><span class="line">            e = <span class="string">"+"</span> === o.charAt(t + <span class="number">1</span>) ? r &gt;&gt;&gt; e : r &lt;&lt; e,</span><br><span class="line">            r = <span class="string">"+"</span> === o.charAt(t) ? r + e &amp; <span class="number">4294967295</span> : r ^ e</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">r</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 第一次报错缘由，i 未定义</span></span><br><span class="line">    <span class="keyword">var</span> i = <span class="string">"320305.131321201"</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> t = r.match(<span class="regexp">/[\uD800-\uDBFF][\uDC00-\uDFFF]/g</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">null</span> === t) &#123;</span><br><span class="line">        <span class="keyword">var</span> a = r.length;</span><br><span class="line">        a &gt; <span class="number">30</span> &amp;&amp; (r = <span class="string">""</span> + r.substr(<span class="number">0</span>, <span class="number">10</span>) + r.substr(<span class="built_in">Math</span>.floor(a / <span class="number">2</span>) - <span class="number">5</span>, <span class="number">10</span>) + r.substr(<span class="number">-10</span>, <span class="number">10</span>))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> C = r.split(<span class="regexp">/[\uD800-\uDBFF][\uDC00-\uDFFF]/</span>), h = <span class="number">0</span>, f = C.length, u = []; f &gt; h; h++)</span><br><span class="line">            <span class="string">""</span> !== C[h] &amp;&amp; u.push.apply(u, e(C[h].split(<span class="string">""</span>))),</span><br><span class="line">            h !== f - <span class="number">1</span> &amp;&amp; u.push(t[h]);</span><br><span class="line">        <span class="keyword">var</span> g = u.length;</span><br><span class="line">        g &gt; <span class="number">30</span> &amp;&amp; (r = u.slice(<span class="number">0</span>, <span class="number">10</span>).join(<span class="string">""</span>) + u.slice(<span class="built_in">Math</span>.floor(g / <span class="number">2</span>) - <span class="number">5</span>, <span class="built_in">Math</span>.floor(g / <span class="number">2</span>) + <span class="number">5</span>).join(<span class="string">""</span>) + u.slice(<span class="number">-10</span>).join(<span class="string">""</span>))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> l = <span class="keyword">void</span> <span class="number">0</span></span><br><span class="line">        , d = <span class="string">""</span> + <span class="built_in">String</span>.fromCharCode(<span class="number">103</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">116</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">107</span>);</span><br><span class="line">    l = <span class="literal">null</span> !== i ? i : (i = o.common[d] || <span class="string">""</span>) || <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> m = l.split(<span class="string">"."</span>), S = <span class="built_in">Number</span>(m[<span class="number">0</span>]) || <span class="number">0</span>, s = <span class="built_in">Number</span>(m[<span class="number">1</span>]) || <span class="number">0</span>, c = [], v = <span class="number">0</span>, F = <span class="number">0</span>; F &lt; r.length; F++) &#123;</span><br><span class="line">        <span class="keyword">var</span> p = r.charCodeAt(F);</span><br><span class="line">        <span class="number">128</span> &gt; p ? c[v++] = p : (<span class="number">2048</span> &gt; p ? c[v++] = p &gt;&gt; <span class="number">6</span> | <span class="number">192</span> : (<span class="number">55296</span> === (<span class="number">64512</span> &amp; p) &amp;&amp; F + <span class="number">1</span> &lt; r.length &amp;&amp; <span class="number">56320</span> === (<span class="number">64512</span> &amp; r.charCodeAt(F + <span class="number">1</span>)) ? (p = <span class="number">65536</span> + ((<span class="number">1023</span> &amp; p) &lt;&lt; <span class="number">10</span>) + (<span class="number">1023</span> &amp; r.charCodeAt(++F)),</span><br><span class="line">            c[v++] = p &gt;&gt; <span class="number">18</span> | <span class="number">240</span>,</span><br><span class="line">            c[v++] = p &gt;&gt; <span class="number">12</span> &amp; <span class="number">63</span> | <span class="number">128</span>) : c[v++] = p &gt;&gt; <span class="number">12</span> | <span class="number">224</span>,</span><br><span class="line">            c[v++] = p &gt;&gt; <span class="number">6</span> &amp; <span class="number">63</span> | <span class="number">128</span>),</span><br><span class="line">            c[v++] = <span class="number">63</span> &amp; p | <span class="number">128</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> w = S, A = <span class="string">""</span> + <span class="built_in">String</span>.fromCharCode(<span class="number">43</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">45</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">97</span>) + (<span class="string">""</span> + <span class="built_in">String</span>.fromCharCode(<span class="number">94</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">43</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">54</span>)), b = <span class="string">""</span> + <span class="built_in">String</span>.fromCharCode(<span class="number">43</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">45</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">51</span>) + (<span class="string">""</span> + <span class="built_in">String</span>.fromCharCode(<span class="number">94</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">43</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">98</span>)) + (<span class="string">""</span> + <span class="built_in">String</span>.fromCharCode(<span class="number">43</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">45</span>) + <span class="built_in">String</span>.fromCharCode(<span class="number">102</span>)), D = <span class="number">0</span>; D &lt; c.length; D++)</span><br><span class="line">        w += c[D],</span><br><span class="line">            w = n(w, A);</span><br><span class="line">    <span class="keyword">return</span> w = n(w, b),</span><br><span class="line">        w ^= s,</span><br><span class="line">    <span class="number">0</span> &gt; w &amp;&amp; (w = (<span class="number">2147483647</span> &amp; w) + <span class="number">2147483648</span>),</span><br><span class="line">        w %= <span class="number">1e6</span>,</span><br><span class="line">    w.toString() + <span class="string">"."</span> + (w ^ S)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>相信童鞋们在观看本次爬虫代码中有非常多的困惑</p>
+<p>首先我们需要从chrome浏览器调试中逐步分析</p>
+<ol>
+<li>找到请求发送的接口</li>
+<li>找到该接口本次请求发送的数据</li>
+<li>连续翻译2-3个单词，比对参数，看看有什么不同</li>
+<li>观察js代码，查找生成发送数据的位置（也就是我们所说的加密位置），我们称之为逆向查找（js逆向），从成品出发，逆流而上，倒着推理出数据的加密流程</li>
+<li>对加密代码进行分析。并将加密代码拷贝下来，粘贴到我们新建的一个js文件中，调用js2py执行加密代码</li>
+<li>爬取过程中会发现的2个问题：<ol>
+<li><code>js2py.internals.simplex.JsException: ReferenceError: i is not defined</code><ol>
+<li>这是因为<code>i</code>这个变量未定义，通过多次翻译分析，可以发现<code>i</code>在此处是个标量（固定值）</li>
+<li>所以我们直接在js文件中的<code>a</code>函数内定义这么一个<code>i</code>变量即可</li>
+</ol>
+</li>
+<li><code>js2py.internals.simplex.JsException: ReferenceError: n is not defined</code><ol>
+<li>当我们补全<code>i</code>变量后，会发现<code>n</code>变量也出现未定义的情况，这时候我们需要继续向上逆推，查找我们的<code>n</code>变量的由来，并将其拷贝至我们js文件的顶端</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>本次小进阶对童鞋们的希望：</p>
+<ol>
+<li>根据上回书，了解chrome浏览器调试面板的功能</li>
+<li>不要被js代码所难倒，本次小进阶的js逆向并不复杂，也不困难。按照思路，一步一步向上逆推即可查找到加密位置</li>
+<li>了解加密位置后，对代码进行自己的理解，并推理。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/26/mongodb笔记/" rel="next" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/01/第九站 - 运用js逆向实现有道翻译爬虫【小进阶】/" rel="prev" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第八站-使用js逆向实现百度翻译小爬虫"><span class="nav-number">1.</span> <span class="nav-text">第八站 - 使用js逆向实现百度翻译小爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分析"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析流程图"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">分析流程图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案之JS逆向"><span class="nav-number">1.1.</span> <span class="nav-text">解决方案之JS逆向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逆向流程"><span class="nav-number">1.1.1.</span> <span class="nav-text">逆向流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现结果"><span class="nav-number">1.1.2.</span> <span class="nav-text">实现结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.2.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/soso.jpg"
+      alt="ChaoS">
+  <p class="site-author-name" itemprop="name">ChaoS</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ChaoS</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
