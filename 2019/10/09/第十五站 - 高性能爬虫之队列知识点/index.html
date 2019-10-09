@@ -54,19 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="这是一个新的开始希望每一天都能在这里进步。加油！">
-<meta name="keywords" content="be yourself">
+  <meta name="description" content="第十五站 - 高性能爬虫之队列知识点队列知识点12345678910111213141516171819202122232425from queue import Queue# 构建队列q = Queue(maxsize=100)item = &amp;#123;&amp;#125;# 把数据放入到队列中，如果队列数据已满，就进行等待直到队列不满时把数据添加到队列中q.put(item)# 把数据放入到队列中，如">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tomorrow will be better">
-<meta property="og:url" content="http://yoursite.com/2018/09/25/Tomorrow-will-be-better/index.html">
+<meta property="og:title" content="ChaoS-World">
+<meta property="og:url" content="http://yoursite.com/2019/10/09/第十五站 - 高性能爬虫之队列知识点/index.html">
 <meta property="og:site_name" content="ChaoS-World">
-<meta property="og:description" content="这是一个新的开始希望每一天都能在这里进步。加油！">
+<meta property="og:description" content="第十五站 - 高性能爬虫之队列知识点队列知识点12345678910111213141516171819202122232425from queue import Queue# 构建队列q = Queue(maxsize=100)item = &amp;#123;&amp;#125;# 把数据放入到队列中，如果队列数据已满，就进行等待直到队列不满时把数据添加到队列中q.put(item)# 把数据放入到队列中，如">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-22T14:17:41.083Z">
+<meta property="og:updated_time" content="2019-10-09T02:46:34.019Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tomorrow will be better">
-<meta name="twitter:description" content="这是一个新的开始希望每一天都能在这里进步。加油！">
-  <link rel="canonical" href="http://yoursite.com/2018/09/25/Tomorrow-will-be-better/">
+<meta name="twitter:title" content="ChaoS-World">
+<meta name="twitter:description" content="第十五站 - 高性能爬虫之队列知识点队列知识点12345678910111213141516171819202122232425from queue import Queue# 构建队列q = Queue(maxsize=100)item = &amp;#123;&amp;#125;# 把数据放入到队列中，如果队列数据已满，就进行等待直到队列不满时把数据添加到队列中q.put(item)# 把数据放入到队列中，如">
+  <link rel="canonical" href="http://yoursite.com/2019/10/09/第十五站 - 高性能爬虫之队列知识点/">
 
 
 <script id="page-configurations">
@@ -80,7 +79,7 @@
   };
 </script>
 
-  <title>Tomorrow will be better | ChaoS-World</title>
+  <title> | ChaoS-World</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -218,7 +217,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/Tomorrow-will-be-better/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/第十五站 - 高性能爬虫之队列知识点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ChaoS">
@@ -230,7 +229,7 @@
       <meta itemprop="name" content="ChaoS-World">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Tomorrow will be better
+        <h1 class="post-title" itemprop="name headline">
 
           
         </h1>
@@ -246,7 +245,7 @@
                 
               
 
-              <time title="创建时间：2018-09-25 21:10:46" itemprop="dateCreated datePublished" datetime="2018-09-25T21:10:46+08:00">2018-09-25</time>
+              <time title="创建时间：2019-10-09 10:46:34" itemprop="dateCreated datePublished" datetime="2019-10-09T10:46:34+08:00">2019-10-09</time>
             </span>
           
 
@@ -261,7 +260,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="这是一个新的开始"><a href="#这是一个新的开始" class="headerlink" title="这是一个新的开始"></a>这是一个新的开始</h1><p>希望每一天都能在这里进步。加油！</p>
+        <h1 id="第十五站-高性能爬虫之队列知识点"><a href="#第十五站-高性能爬虫之队列知识点" class="headerlink" title="第十五站 - 高性能爬虫之队列知识点"></a>第十五站 - 高性能爬虫之队列知识点</h1><h2 id="队列知识点"><a href="#队列知识点" class="headerlink" title="队列知识点"></a>队列知识点</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> queue <span class="keyword">import</span> Queue</span><br><span class="line"><span class="comment"># 构建队列</span></span><br><span class="line">q = Queue(maxsize=<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">item = &#123;&#125;</span><br><span class="line"><span class="comment"># 把数据放入到队列中，如果队列数据已满，就进行等待直到队列不满时把数据添加到队列中</span></span><br><span class="line">q.put(item)</span><br><span class="line"><span class="comment"># 把数据放入到队列中，如果队列数据已满，就不进行等待，引发异常</span></span><br><span class="line">q.put_nowait(item)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 把数据从队列中取出，如果队列为空，就进行等待直到队列不为空，返回数据</span></span><br><span class="line">q.get()</span><br><span class="line"><span class="comment"># 把数据从队列中取出，如果队列为空，就不进行等待，引发异常</span></span><br><span class="line">q.get_nowait()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取队列中元素个数</span></span><br><span class="line">q.qsize()</span><br><span class="line"><span class="comment"># 获取未完成的任务数</span></span><br><span class="line">q.unfinished_tasks</span><br><span class="line"></span><br><span class="line"><span class="comment"># 让 unfinished_tasks 属性 -1</span></span><br><span class="line">q.task_done()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当前程序进行等待状态，直到队列的 unfinished_tasks 属性为 0 时继续执行</span></span><br><span class="line">q.join()</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>当调用 <code>put</code> 或 <code>put_nowait</code> 方法时 <code>q.qsize()</code> 会 <code>+ 1</code>，并且 <code>q.unfinished_tasks</code> 也会 <code>+ 1</code></li>
+<li>当调用 <code>get</code> 或 <code>get_nowait</code> 方法时 <code>q.qsize()</code> 会 <code>-1</code>，但是 <code>unfinished_tasks</code> 不发生变化</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>队列<ul>
+<li>一次<code>put</code>  = 一次<code>get</code> ＋ 一次<code>task_done</code></li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -272,20 +283,15 @@
       
 
       <footer class="post-footer">
-          
-            
-          
-          <div class="post-tags">
-            
-              <a href="/tags/be-yourself/" rel="tag"># be yourself</a>
-            
-          </div>
-        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/09/第十四站 - 简单数据转换/" rel="next" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
               
             </div>
 
@@ -293,8 +299,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2018/10/01/第一站 - 爬虫预备知识/" rel="prev" title="第一站 - 爬虫预备知识">
-                  第一站 - 爬虫预备知识 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/10/09/第十六站 - 高性能爬虫之池化技术/" rel="prev" title="">
+                   <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -344,7 +350,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#这是一个新的开始"><span class="nav-number">1.</span> <span class="nav-text">这是一个新的开始</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第十五站-高性能爬虫之队列知识点"><span class="nav-number">1.</span> <span class="nav-text">第十五站 - 高性能爬虫之队列知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#队列知识点"><span class="nav-number">1.1.</span> <span class="nav-text">队列知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
