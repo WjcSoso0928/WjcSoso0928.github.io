@@ -54,19 +54,19 @@
   };
 </script>
 
-  <meta name="description" content="第十六站 - 高性能爬虫之池化技术线程池问题 计算机每次创建线程和销毁线程需要额外占用资源，频繁创建和销毁线程会导致计算机性能下降。">
+  <meta name="description" content="线程池问题 计算机每次创建线程和销毁线程需要额外占用资源，频繁创建和销毁线程会导致计算机性能下降。 解决思路">
 <meta name="keywords" content="spider">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第十六站 - 高性能爬虫之池化技术">
 <meta property="og:url" content="http://yoursite.com/2018/12/29/第十六站 - 高性能爬虫之池化技术/index.html">
 <meta property="og:site_name" content="ChaoS-World">
-<meta property="og:description" content="第十六站 - 高性能爬虫之池化技术线程池问题 计算机每次创建线程和销毁线程需要额外占用资源，频繁创建和销毁线程会导致计算机性能下降。">
+<meta property="og:description" content="线程池问题 计算机每次创建线程和销毁线程需要额外占用资源，频繁创建和销毁线程会导致计算机性能下降。 解决思路">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/12/29/第十六站%20-%20高性能爬虫之池化技术/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
-<meta property="og:updated_time" content="2019-10-09T03:30:53.011Z">
+<meta property="og:updated_time" content="2019-10-09T09:01:22.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第十六站 - 高性能爬虫之池化技术">
-<meta name="twitter:description" content="第十六站 - 高性能爬虫之池化技术线程池问题 计算机每次创建线程和销毁线程需要额外占用资源，频繁创建和销毁线程会导致计算机性能下降。">
+<meta name="twitter:description" content="线程池问题 计算机每次创建线程和销毁线程需要额外占用资源，频繁创建和销毁线程会导致计算机性能下降。 解决思路">
 <meta name="twitter:image" content="http://yoursite.com/2018/12/29/第十六站%20-%20高性能爬虫之池化技术/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
   <link rel="canonical" href="http://yoursite.com/2018/12/29/第十六站 - 高性能爬虫之池化技术/">
 
@@ -263,10 +263,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="第十六站-高性能爬虫之池化技术"><a href="#第十六站-高性能爬虫之池化技术" class="headerlink" title="第十六站 - 高性能爬虫之池化技术"></a>第十六站 - 高性能爬虫之池化技术</h1><h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><blockquote>
+        <h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><blockquote>
 <p>计算机每次创建线程和销毁线程需要额外占用资源，频繁创建和销毁线程会导致计算机性能下降。</p>
-</blockquote><a id="more"></a>
-<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p><img src="/2018/12/29/第十六站 - 高性能爬虫之池化技术/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="description" title="线程池流程图"></p>
+</blockquote><h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><a id="more"></a>
+<p><img src="/2018/12/29/第十六站 - 高性能爬虫之池化技术/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="description" title="线程池流程图"></p>
 <blockquote>
 <p>使用池化技术，预先常见一定的线程数量放到池中，需要执行代码时从池中获取创建好的线程，让该线程执行代码任务，执行完成后把线程放回池中，给其他代码任务代码使用。</p>
 </blockquote>
@@ -416,7 +416,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第十六站-高性能爬虫之池化技术"><span class="nav-number">1.</span> <span class="nav-text">第十六站 - 高性能爬虫之池化技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">1.1.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决思路"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现流程"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">实现流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现代码"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">实现代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">1.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-number">1.0.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决思路"><span class="nav-number">1.0.2.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">1.0.3.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现流程"><span class="nav-number">1.0.4.</span> <span class="nav-text">实现流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现代码"><span class="nav-number">1.0.5.</span> <span class="nav-text">实现代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -434,7 +434,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
